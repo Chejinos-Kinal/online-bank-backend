@@ -1,0 +1,195 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "LutinProducts",
+    "collectionId": "77044412-3717-4da0-a9ef-9b1eaa3ef9c8",
+    "dateExported": "2024-05-31T22:50:27.277Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "fbb372eb-f788-4e8f-8faa-181d13f33eb3",
+            "colId": "77044412-3717-4da0-a9ef-9b1eaa3ef9c8",
+            "containerId": "",
+            "name": "addProduct",
+            "url": "/products/saveProduct",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-31T20:22:05.906Z",
+            "modified": "2024-05-31T22:45:33.439Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhNDk0MGUyYzBiNjM5ZTdmOTY0ZTAiLCJ1c2VybmFtZSI6IkFETUlOQiIsIm5hbWUiOiJBZG1pbiIsInN1cm5hbWUiOiJEZWZhdWx0Iiwicm9sZSI6IkFETUlOIiwiRFBJIjoiMTIzNDU2Nzg5MDEwMSIsImlhdCI6MTcxNzE5MzAyNywiZXhwIjoxNzE3MjAzODI3fQ.Si5MhqBqzgzvxiND6ZyWL3oJrh9-k4BrcW9XUyUKcjw"
+                }
+            ],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Helado"
+                    },
+                    {
+                        "name": "description",
+                        "value": "El helado es de sabor de mango."
+                    },
+                    {
+                        "name": "type",
+                        "value": "Postre"
+                    },
+                    {
+                        "name": "price",
+                        "value": "25.000"
+                    },
+                    {
+                        "name": "dateCreation",
+                        "value": "2024-05-31"
+                    },
+                    {
+                        "name": "dateModified",
+                        "value": "2023-05-31"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "314ea0d7-b504-4f4d-bb07-b9049c9cf172",
+            "colId": "77044412-3717-4da0-a9ef-9b1eaa3ef9c8",
+            "containerId": "",
+            "name": "login",
+            "url": "/user/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-05-31T21:38:09.584Z",
+            "modified": "2024-05-31T22:03:05.577Z",
+            "headers": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "username",
+                        "value": "ADMINB"
+                    },
+                    {
+                        "name": "password",
+                        "value": "ADMINB"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "1cb28fcc-3764-4bbc-a9b5-eb738f9a489f",
+            "colId": "77044412-3717-4da0-a9ef-9b1eaa3ef9c8",
+            "containerId": "",
+            "name": "updateProduct",
+            "url": "/products/updateProduct/665a4a2fd2af6884e5fe3b14",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-05-31T22:13:57.679Z",
+            "modified": "2024-05-31T22:18:11.653Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhNDk0MGUyYzBiNjM5ZTdmOTY0ZTAiLCJ1c2VybmFtZSI6IkFETUlOQiIsIm5hbWUiOiJBZG1pbiIsInN1cm5hbWUiOiJEZWZhdWx0Iiwicm9sZSI6IkFETUlOIiwiRFBJIjoiMTIzNDU2Nzg5MDEwMSIsImlhdCI6MTcxNzE5MzAyNywiZXhwIjoxNzE3MjAzODI3fQ.Si5MhqBqzgzvxiND6ZyWL3oJrh9-k4BrcW9XUyUKcjw"
+                }
+            ],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "description",
+                        "value": "El helado tiene sabor a mango."
+                    },
+                    {
+                        "name": "type",
+                        "value": "Postre"
+                    },
+                    {
+                        "name": "price",
+                        "value": "15.00"
+                    },
+                    {
+                        "name": "dateCreation",
+                        "value": "2024-05-30"
+                    },
+                    {
+                        "name": "dateModified",
+                        "value": "2024-05-30"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "84eff9db-0869-497c-a8b8-5833ab22856e",
+            "colId": "77044412-3717-4da0-a9ef-9b1eaa3ef9c8",
+            "containerId": "",
+            "name": "changeStatus",
+            "url": "/products/changeStatus/665a530d7f08af44405a1357",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-05-31T22:22:16.447Z",
+            "modified": "2024-05-31T22:45:56.809Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhNDk0MGUyYzBiNjM5ZTdmOTY0ZTAiLCJ1c2VybmFtZSI6IkFETUlOQiIsIm5hbWUiOiJBZG1pbiIsInN1cm5hbWUiOiJEZWZhdWx0Iiwicm9sZSI6IkFETUlOIiwiRFBJIjoiMTIzNDU2Nzg5MDEwMSIsImlhdCI6MTcxNzE5MzAyNywiZXhwIjoxNzE3MjAzODI3fQ.Si5MhqBqzgzvxiND6ZyWL3oJrh9-k4BrcW9XUyUKcjw"
+                }
+            ]
+        },
+        {
+            "_id": "ff1af72d-f9f2-4bf9-826c-f4bd57dbcbd2",
+            "colId": "77044412-3717-4da0-a9ef-9b1eaa3ef9c8",
+            "containerId": "",
+            "name": "searchFalseProducts",
+            "url": "/products/searchFalseProducts",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2024-05-31T22:35:49.855Z",
+            "modified": "2024-05-31T22:36:41.919Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhNDk0MGUyYzBiNjM5ZTdmOTY0ZTAiLCJ1c2VybmFtZSI6IkFETUlOQiIsIm5hbWUiOiJBZG1pbiIsInN1cm5hbWUiOiJEZWZhdWx0Iiwicm9sZSI6IkFETUlOIiwiRFBJIjoiMTIzNDU2Nzg5MDEwMSIsImlhdCI6MTcxNzE5NDIzNywiZXhwIjoxNzE3MjA1MDM3fQ.MhLSqZ57fDyKHFvsd8g0DvdGkPiK6H4TGi8aG-lFjwU"
+                }
+            ]
+        },
+        {
+            "_id": "b5bb8341-5446-47f6-8fa1-263cc7bc322b",
+            "colId": "77044412-3717-4da0-a9ef-9b1eaa3ef9c8",
+            "containerId": "",
+            "name": "searchProduct",
+            "url": "/products/searchProduct/665a52b47f08af44405a1352",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-05-31T22:46:54.486Z",
+            "modified": "2024-05-31T22:48:46.607Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjVhNDk0MGUyYzBiNjM5ZTdmOTY0ZTAiLCJ1c2VybmFtZSI6IkFETUlOQiIsIm5hbWUiOiJBZG1pbiIsInN1cm5hbWUiOiJEZWZhdWx0Iiwicm9sZSI6IkFETUlOIiwiRFBJIjoiMTIzNDU2Nzg5MDEwMSIsImlhdCI6MTcxNzE5NDIzNywiZXhwIjoxNzE3MjA1MDM3fQ.MhLSqZ57fDyKHFvsd8g0DvdGkPiK6H4TGi8aG-lFjwU"
+                }
+            ]
+        },
+        {
+            "_id": "225b8fdd-a18c-461d-a3f6-7759594c25ff",
+            "colId": "77044412-3717-4da0-a9ef-9b1eaa3ef9c8",
+            "containerId": "",
+            "name": "getProduct",
+            "url": "/products/getProduct",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-05-31T22:49:03.742Z",
+            "modified": "2024-05-31T22:49:17.180Z",
+            "headers": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "localhost:2880"
+        }
+    },
+    "ref": "oRE7ZEfvbliHA75WWzBAOyq9fAvZtIeAAKNZlXqgaGaXG-vtE7l2v1Er1klf8aU42axRxxWSNg4h9cqVTfQj9w"
+}
