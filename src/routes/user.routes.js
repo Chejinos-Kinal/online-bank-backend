@@ -1,7 +1,7 @@
 'use strict'
  
 import express from 'express'
-import { login } from './user.controller.js'
+import { login } from '../controllers/user.controller.js'
  
 const api = express.Router()
  

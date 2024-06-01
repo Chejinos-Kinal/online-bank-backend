@@ -10,7 +10,7 @@ import {
     searchProduct,
     getProduct,
     searchFalseProducts
-} from './products.controller.js'
+} from '../controllers/products.controller.js'
 
 import {
     validateJwt,
