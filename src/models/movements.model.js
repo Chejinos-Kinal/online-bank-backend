@@ -8,9 +8,10 @@ const movementsSchema = new Schema({
         required: true,
         unique: true
     },
-    numberAccountOrigin: {
-        type: String,
-        required: true
+    account:{
+        type:Schema.Types.ObjectId,
+        ref:'Account',
+        required:true
     },
     numberAccountDestination: {
         type: String,
@@ -36,10 +37,11 @@ const movementsSchema = new Schema({
         type: String,
         required: true
     },
-    idProduct: {
-        type: String,
-        required: true
-    }
+    products:[{
+        type:Schema.Types.ObjectId,
+        ref:'Product',
+        required:true
+    }]
 });
 
 export default model('Movements', movementsSchema);

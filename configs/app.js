@@ -6,6 +6,7 @@ import cors from 'cors'
 import { defaultAdmin } from '../src/controllers/user.controller.js';
 import userRoutes from '../src/routes/user.routes.js'
 import productsRoutes from '../src/routes/products.routes.js'
+import typeAccountRoutes from '../src/routes/typeAccount.routes.js'
 
 const app = express()
 config()
@@ -18,6 +19,8 @@ app.use(helmet())
 app.use(morgan('dev'))
 app.use('/user', userRoutes)
 app.use('/products', productsRoutes)
+app.use('/typeAccount', typeAccountRoutes)
+
 
 export const initServer = () => {
     defaultAdmin()

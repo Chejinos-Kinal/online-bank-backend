@@ -68,17 +68,17 @@ const userSchema = new Schema({
         product:{
             type: Schema.Types.ObjectId,
             ref: 'Product',
-            required: true
+            required: false
         },
         quantity: {
             type: Number,
-            required: true
+            required: false
         }
     }],
     purchases: [{
         type: Schema.Types.ObjectId,
         ref: 'Purchase',
-        required: true,
+        required: false,
         default: []
     }]
 });
