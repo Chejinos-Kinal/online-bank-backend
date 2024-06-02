@@ -3,6 +3,11 @@
 import { Schema, model } from 'mongoose';
 
 const productsSchema = new Schema({
+    id: {
+        type: String,
+        required: true,
+        unique: true
+    },
     name: {
         type: String,
         required: true
@@ -19,18 +24,13 @@ const productsSchema = new Schema({
         type: Number,
         required: true
     },
-    dateCreation: {
+    fechaCreacion: {
         type: Date,
         required: true
     },
-    dateModified: {
+    fechaModificacion: {
         type: Date,
         required: true
-    },
-    changeStatus: {
-        type: Boolean,
-        required: true,
-        default: true
     }
 });
 

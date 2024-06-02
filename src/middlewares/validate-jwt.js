@@ -1,7 +1,7 @@
 'use strict'
 
 import jwt from 'jsonwebtoken'
-import User from '../user/user.model.js'
+import User from '../models/user.model.js'
 
 export const validateJwt = async (req, res, next) => {
     try {
@@ -22,8 +22,8 @@ export const validateJwt = async (req, res, next) => {
 
 export const isAdmin = async (req, res, next) => {
     try {
-        let { rol, username } = req.user
-        if (!rol || rol !== 'ADMIN') return res.status(403).send({ message: `You dont have access | username ${username}` })
+        let { role, username } = req.user
+        if (!role || role !== 'ADMIN') return res.status(403).send({ message: `You dont have access | username ${username}` })
         next()
     } catch (err) {
         console.error(err)

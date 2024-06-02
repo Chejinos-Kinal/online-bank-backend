@@ -2,16 +2,16 @@
 
 import jwt from 'jsonwebtoken'
 
-const secretKey = '@LlaveSecreta@'
+const secretkey = '@LlaveSecreta@'
 
 export const createToken = async (payload) => {
     try {
-        return jwt.sign(payload, secretKey, {
-            expiresIn: '3h',
+        return jwt.sign(payload, secretkey, {
+            expiresIn: '1d',
             algorithm: 'HS256'
         })
-    } catch (err) {
-        console.error(err)
-        return err
+    } catch (error) {
+        console.error(error)
+        return error
     }
 }

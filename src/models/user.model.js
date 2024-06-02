@@ -7,7 +7,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    surname: {
+    surname:{
         type: String,
         required: true
     },
@@ -58,7 +58,29 @@ const userSchema = new Schema({
         uppercase: true,
         enum: ['ADMIN', 'USER'],
         required: true
-    }
+    },
+    status:{
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    cart: [{
+        product:{
+            type: Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true
+        }
+    }],
+    purchases: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Purchase',
+        required: true,
+        default: []
+    }]
 });
 
 export default model('User', userSchema);

@@ -1,7 +1,6 @@
 'use strict'
 
-import Product from './products.model.js'
-import { checkUpdate } from '../utils/validator.js'
+import Product from '../models/products.model.js'
 
 export const test = (req, res) => {
     return res.send({ message: 'Function test is running | Product' })
@@ -25,8 +24,6 @@ export const updateProduct = async (req, res) => {
     try {
         let { id } = req.params
         let data = req.body
-        let update = checkUpdate(data, id)
-        if (!update) return res.status(400).send({ message: 'Have submitted some data that cannot be updated or missing data.' })
         let updateProduct = await Product.findOneAndUpdate(
             { _id: id },
             data,

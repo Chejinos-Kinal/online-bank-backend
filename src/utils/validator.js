@@ -1,6 +1,6 @@
 import { compare, hash } from 'bcrypt'
 
-export const encrypt = async (password) => {
+export const encrypt = async(password) => {
     try {
         return await hash(password, 10)
     } catch (error) {
@@ -9,7 +9,7 @@ export const encrypt = async (password) => {
     }
 }
 
-export const checkPassword = async (password, hash) => {
+export const checkPassword = async(password, hash) => {   
     try {
         return await compare(password, hash)
     } catch (error) {
@@ -17,4 +17,3 @@ export const checkPassword = async (password, hash) => {
         return error
     }
 }
-
