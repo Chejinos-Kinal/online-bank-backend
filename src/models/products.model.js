@@ -2,12 +2,13 @@
 
 import { Schema, model } from 'mongoose';
 
+
 const productsSchema = new Schema({
-    id: {
+    /* id: {
         type: String,
         required: true,
         unique: true
-    },
+    }, */
     name: {
         type: String,
         required: true
@@ -31,6 +32,11 @@ const productsSchema = new Schema({
     fechaModificacion: {
         type: Date,
         required: true
+    },
+    changeStatus:{
+        type: Boolean,
+        required: true,
+        default: true
     }
 });
 

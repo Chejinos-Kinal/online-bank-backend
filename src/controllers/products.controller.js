@@ -45,8 +45,10 @@ export const changeStatus = async (req, res) => {
         if ((data.name != null) || (data.description != null) || (data.type != null) || (data.price != null) || (data.dateCreation != null) || (data.dateModified != null)) {
             return res.status(401).send({ message: 'You only can update the status.' })
         }
-        let update = checkUpdate(data, id)
-        if (!update) return res.status(400).send({ message: 'Have submitted some data that cannot be updated or missing data.' })
+
+        //Hace falta el checkUpdate
+        /* let update = checkUpdate(data, id)
+        if (!update) return res.status(400).send({ message: 'Have submitted some data that cannot be updated or missing data.' }) */
         let updateProductFalse = await Product.findOneAndUpdate(
             { _id: id },
             data,
