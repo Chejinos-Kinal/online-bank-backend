@@ -63,7 +63,24 @@ const userSchema = new Schema({
         type: Boolean,
         required: true,
         default: true
-    }
+    },
+    cart: [{
+        product:{
+            type: Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true
+        }
+    }],
+    purchases: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Purchase',
+        required: true,
+        default: []
+    }]
 });
 
 export default model('User', userSchema);

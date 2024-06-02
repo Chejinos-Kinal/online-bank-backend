@@ -3,8 +3,9 @@ import {config} from 'dotenv';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors'
-import { defaultAdmin } from '../src/user/user.controller.js';
-import userRoutes from '../src/user/user.routes.js'
+import { defaultAdmin } from '../src/controllers/user.controller.js';
+import userRoutes from '../src/routes/user.routes.js'
+import productsRoutes from '../src/routes/products.routes.js'
 
 const app = express()
 config()
@@ -16,11 +17,11 @@ app.use(cors())
 app.use(helmet())
 app.use(morgan('dev'))
 app.use('/user', userRoutes)
+app.use('/products', productsRoutes)
 
 export const initServer = () => {
     defaultAdmin()
     app.listen(port)
     console.log(`Server running on port ${port}`)
 }
-
 
