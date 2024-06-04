@@ -1,6 +1,6 @@
 'use strict';
 
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const purchaseSchema = new Schema({
     user: {
@@ -22,4 +22,4 @@ const purchaseSchema = new Schema({
     }
 )
 
-export default model('Purchase', purchaseSchema)
+export default model('Purchase', purchaseSchema);

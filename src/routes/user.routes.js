@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
 import express from 'express'
 import { createUser, deleteUser, getUser, getUserClient, getUsers, login, updateUser, updateUserClient } from '../controllers/user.controller.js'
 import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js'
 
-const api = express.Router()
+const api = express.Router();
 
 //Rutas publicas
 api.post('/login', login)
@@ -20,4 +20,4 @@ api.get('/getUsers', [validateJwt, isAdmin], getUsers)
 api.get('/getUserClient/:id', [validateJwt], getUserClient)
 api.put('/updateUserClient/:id', [validateJwt], updateUserClient)
 
-export default api
+export default api;
