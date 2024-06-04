@@ -1,5 +1,5 @@
-import { initServer } from '../configs/app.js';
-import { connect } from '../configs/mongo.js';
+import { initServer } from '../db/app.js';
+import { connect } from '../db/mongo.js';
 
 initServer();
 connect();
