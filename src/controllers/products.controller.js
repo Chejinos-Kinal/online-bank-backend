@@ -7,17 +7,19 @@ export const test = (req, res) => {
 };
 
 export const saveProduct = async (req, res) => {
-  try {
-    let data = req.body;
-    data.status = true;
-    let product = new Product(data);
-    await product.save();
-    return res.status(200).send({ message: 'Product saved successfully.' });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send({ message: 'Error saving the product.', err });
-  }
-};
+    try {
+        let data = req.body
+        let existingProduct = await Product.findOne({name: data.name})
+        if (existingProduct) return res.status(400).send({message: 'Product already exists'})
+        data.status = true
+        let product = new Product(data)
+        await product.save()
+        return res.status(200).send({ message: 'Product saved successfully.' })
+    } catch (err) {
+        console.error(err)
+        return res.status(500).send({ message: 'Error saving the product.', err })
+    }
+}
 
 export const updateProduct = async (req, res) => {
   try {
