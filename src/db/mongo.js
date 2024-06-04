@@ -1,24 +1,25 @@
 'use strict';
 
 import mongoose from 'mongoose';
+import 'dotenv/config';
 
-export const connect = async () => {
+export default async function connection() {
   try {
     mongoose.connection.on('error', () => {
-      console.log('Faied to connect');
+      console.log('Failed to connect database');
       mongoose.disconnect();
     });
 
     mongoose.connection.on('connected', () =>
-      console.log('MongoDB | Connected to MongoDB'),
+      console.log('MongoDB | Connected to mongo'),
     );
 
     mongoose.connection.on('open', () =>
       console.log('MongoDB | Connected to database'),
     );
 
-    await mongoose.connect('mongodb://127.0.0.1:27017/BancaEnLinea#5');
+    await mongoose.connect(process.env.MONGODB_CNN, {});
   } catch (error) {
     console.error({ message: 'Database connection error', error });
   }
-};
+}

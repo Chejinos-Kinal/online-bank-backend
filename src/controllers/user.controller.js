@@ -5,7 +5,7 @@ import Account from '../models/account.model.js';
 import { encrypt, checkPassword } from '../utils/validator.js';
 import { createToken } from '../utils/jwt.js';
 
-// ----------------------------------------------- ADMIN -----------------------------------------------
+// NOTE: Default admin
 export const defaultAdmin = async () => {
   try {
     let existingAdmin = await User.findOne({ role: 'ADMIN' });
@@ -155,7 +155,7 @@ export const getUser = async (req, res) => {
   }
 };
 
-// ----------------------------------------------- USER -----------------------------------------------
+// NOTE: Client
 export const updateUserClient = async (req, res) => {
   try {
     const allowedFields = ['name', 'surname', 'address', 'nameJob'];
