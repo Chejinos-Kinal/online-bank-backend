@@ -1,9 +1,8 @@
 'use strict';
 
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
-
-const productsSchema = new Schema({
+const productSchema = new Schema({
     /* id: {
         type: String,
         required: true,
@@ -25,19 +24,15 @@ const productsSchema = new Schema({
         type: Number,
         required: true
     },
-    fechaCreacion: {
-        type: Date,
-        required: true
-    },
-    fechaModificacion: {
-        type: Date,
-        required: true
-    },
     changeStatus:{
         type: Boolean,
         required: true,
         default: true
+    }},
+    {
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
     }
-});
-
-export default model('Products', productsSchema)
+    });
+export default model('Product', productSchema)

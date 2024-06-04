@@ -13,19 +13,18 @@ import {
 } from '../controllers/products.controller.js'
 
 import {
-    validateJwt,
+    validateJwt, isAdmin
 } from '../middlewares/validate-jwt.js'
 
 const api = Router()
 
-
 api.get('/test', test)
-api.post('/saveProduct', [validateJwt], saveProduct)
-api.put('/updateProduct/:id', [validateJwt], updateProduct)
-api.get('/searchFalseProducts', [validateJwt], searchFalseProducts)
-api.put('/changeStatus/:id', [validateJwt], changeStatus)
-api.get('/searchProduct/:id', [validateJwt], searchProduct)
-api.get('/getProduct', getProduct)
+api.post('/saveProduct', [validateJwt, isAdmin], saveProduct)
+api.put('/updateProduct/:id', [validateJwt, isAdmin], updateProduct)
+api.get('/searchFalseProducts', [validateJwt, isAdmin], searchFalseProducts)
+api.put('/changeStatus/:id', [validateJwt, isAdmin], changeStatus)
+api.get('/searchProduct/:id', [validateJwt, isAdmin], searchProduct)
+api.get('/getProduct', [validateJwt],getProduct)
 
 api.get('/test', test)
 
