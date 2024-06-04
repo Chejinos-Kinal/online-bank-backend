@@ -3,10 +3,10 @@
 import { Schema, model } from 'mongoose';
 
 const movementsSchema = new Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true
+    user:{
+        type:Schema.Types.ObjectId,
+        ref:'User',
+        required:true
     },
     account:{
         type:Schema.Types.ObjectId,
@@ -21,27 +21,25 @@ const movementsSchema = new Schema({
         type: Number,
         required: true
     },
-    typeMovement: {
-        type: String,
-        required: true
-    },
     date: {
         type: Date,
-        required: true
+        required: true,
+        default: Date.now()
     },
-    state: {
-        type: String,  // Assuming 'Tipo' should be 'String'
-        required: true
+    status: {
+        type: Boolean,  // Assuming 'Tipo' should be 'String'
+        required: true,
+        default: true
     },
     description: {
         type: String,
         required: true
-    },
+    }/* ,
     products:[{
         type:Schema.Types.ObjectId,
         ref:'Product',
         required:true
-    }]
+    }] */
 });
 
 export default model('Movements', movementsSchema);

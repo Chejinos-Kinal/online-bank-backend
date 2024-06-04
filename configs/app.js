@@ -7,6 +7,8 @@ import { defaultAdmin } from '../src/controllers/user.controller.js';
 import userRoutes from '../src/routes/user.routes.js'
 import productsRoutes from '../src/routes/products.routes.js'
 import typeAccountRoutes from '../src/routes/typeAccount.routes.js'
+import movementRoutes from '../src/routes/movements.routes.js'
+
 
 const app = express()
 config()
@@ -20,6 +22,7 @@ app.use(morgan('dev'))
 app.use('/user', userRoutes)
 app.use('/products', productsRoutes)
 app.use('/typeAccount', typeAccountRoutes)
+app.use('/movement', movementRoutes)
 
 
 export const initServer = () => {
