@@ -2,6 +2,7 @@
 
 import User from '../models/user.model.js';
 import Account from '../models/account.model.js';
+import TypeAccount from '../models/typeAccount.model.js';
 import { encrypt, checkPassword } from '../utils/validator.js';
 import { createToken } from '../utils/jwt.js';
 
@@ -52,6 +53,8 @@ export const createUser = async (req, res) => {
     if (existingUser)
       return res.status(400).send({ message: 'User already exist' });
     let accountNumber = generateAccountNumber();
+    let existingTypeAccount = await TypeAccount.findOne({_id: data.typeAccount})
+    if (!existingTypeAccount) return res.status(404).send({message: 'Type account not found'})
     let account = new Account({
       accountNumber: accountNumber,
       balance: 0,
