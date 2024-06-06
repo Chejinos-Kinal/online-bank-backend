@@ -3,37 +3,8 @@
 import User from '../models/user.model.js';
 import Account from '../models/account.model.js';
 import TypeAccount from '../models/typeAccount.model.js';
-import { encrypt, checkPassword } from '../utils/validator.js';
+import { encrypt, checkPassword } from '../utils/bcrypt.js';
 import { createToken } from '../utils/jwt.js';
-
-// NOTE: Default admin
-export const defaultAdmin = async () => {
-  try {
-    let existingAdmin = await User.findOne({ role: 'ADMIN' });
-    if (!existingAdmin) {
-      let data = {
-        name: 'Admin',
-        surname: 'Default',
-        username: 'ADMINB',
-        DPI: '1234567890101',
-        address: 'Calle 123',
-        phoneNumber: '12345678',
-        email: 'admin@gmail.com',
-        password: await encrypt('ADMINB'),
-        nameJob: 'Admin',
-        monthlySalary: 0,
-        role: 'ADMIN',
-      };
-      let user = new User(data);
-      await user.save();
-      return console.log('Admin by default created');
-    } else {
-      return console.log('Admin by default already exist');
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 const generateAccountNumber = () => {
   let accountNumber = '';
@@ -53,8 +24,11 @@ export const createUser = async (req, res) => {
     if (existingUser)
       return res.status(400).send({ message: 'User already exist' });
     let accountNumber = generateAccountNumber();
-    let existingTypeAccount = await TypeAccount.findOne({_id: data.typeAccount})
-    if (!existingTypeAccount) return res.status(404).send({message: 'Type account not found'})
+    let existingTypeAccount = await TypeAccount.findOne({
+      _id: data.typeAccount,
+    });
+    if (!existingTypeAccount)
+      return res.status(404).send({ message: 'Type account not found' });
     let account = new Account({
       accountNumber: accountNumber,
       balance: 0,

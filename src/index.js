@@ -5,8 +5,11 @@ import cors from 'cors';
 import 'dotenv/config.js';
 
 import connection from './db/mongo.js';
-import { defaultAdmin } from './controllers/user.controller.js';
-import { defaultTypeAccount } from './controllers/typeAccount.controller.js';
+import { users, createAllUsers } from './default-data/user.data.js';
+import {
+  typeAccounts,
+  createAllTypeAccounts,
+} from './default-data/typeAccount.data.js';
 
 // NOTE: Routes
 import userRoutes from './routes/user.routes.js';
@@ -30,8 +33,8 @@ app.use('/typeAccount', typeAccountRoutes);
 
 connection()
   .then(() => {
-    defaultAdmin();
-    defaultTypeAccount();
+    createAllUsers(users);
+    createAllTypeAccounts(typeAccounts);
   })
   .catch((error) => {
     console.error(error);
