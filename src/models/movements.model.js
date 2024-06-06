@@ -2,48 +2,40 @@
 
 import { Schema, model } from 'mongoose';
 
-const movementsSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  account: {
-    type: Schema.Types.ObjectId,
-    ref: 'Account',
-    required: true,
-  },
-  numberAccountDestination: {
-    type: String,
-    required: true,
-  },
-  amount: {
-    type: Number,
-    required: true,
-  },
-  typeMovement: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: Date,
-    required: true,
-  },
-  state: {
-    type: String, // Assuming 'Tipo' should be 'String'
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  products: [
-    {
+const movementsSchema = new Schema(
+  {
+    user: {
       type: Schema.Types.ObjectId,
-      ref: 'Product',
+      ref: 'User',
       required: true,
     },
-  ],
-});
+    account: {
+      type: Schema.Types.ObjectId,
+      ref: 'Account',
+      required: true,
+    },
+    numberAccountDestination: {
+      type: String,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: Boolean, // Assuming 'Tipo' should be 'String'
+      required: true,
+      default: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  },
+);
 
 export default model('Movements', movementsSchema);
