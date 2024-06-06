@@ -17,27 +17,38 @@ const generateAccountNumber = () => {
 export const createUser = async (req, res) => {
   try {
     let data = req.body;
+
     data.password = await encrypt(data.password);
+
     let existingUser = await User.findOne({
       $or: [{ username: data.username }, { email: data.email }],
     });
+
     if (existingUser)
       return res.status(400).send({ message: 'User already exist' });
+
     let accountNumber = generateAccountNumber();
     let existingTypeAccount = await TypeAccount.findOne({
       _id: data.typeAccount,
     });
+
     if (!existingTypeAccount)
       return res.status(404).send({ message: 'Type account not found' });
+
     let account = new Account({
       accountNumber: accountNumber,
       balance: 0,
       typeAccount: data.typeAccount,
     });
+
     await account.save();
+
     data.idAccount = account._id;
+
     let user = new User(data);
+
     await user.save();
+
     return res.send({ message: 'User created succesfully' });
   } catch (error) {
     console.error(error);

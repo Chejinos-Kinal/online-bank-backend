@@ -1,118 +1,207 @@
 'use strict';
 
 import Product from '../models/product.model.js';
+import Category from '../models/category.model.js';
 
-export const test = (req, res) => {
-  return res.send({ message: 'Function test is running | Product' });
+export const getProducts = async (req, res) => {
+  try {
+    const products = await Product.find({}).populate('category', 'name');
+
+    return res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-export const saveProduct = async (req, res) => {
+export const getProductsMostSold = async (req, res) => {
   try {
-    let data = req.body;
-    let existingProduct = await Product.findOne({ name: data.name });
-    if (existingProduct)
-      return res.status(400).send({ message: 'Product already exists' });
-    data.status = true;
-    let product = new Product(data);
-    await product.save();
-    return res.status(200).send({ message: 'Product saved successfully.' });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send({ message: 'Error saving the product.', err });
+    const products = await Product.find({})
+      .populate('category', 'name')
+      .sort({ timesSold: -1 });
+
+    return res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const searchProducts = async (req, res) => {
+  try {
+    const { name } = req.body;
+
+    if (!name) {
+      const products = await Product.find({}).populate('category', 'name -_id');
+
+      return res.json({
+        message: 'No search parameters provided, returning all products',
+        products,
+      });
+    }
+
+    const products = await Product.find({ name: { $regex: name } });
+
+    if (!products) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    return res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getProductsByCategory = async (req, res) => {
+  try {
+    const { categoryName } = req.params;
+
+    const category = await Category.findOne({ name: categoryName });
+
+    if (!category) {
+      return res.status(404).json({ message: 'Category not found' });
+    }
+
+    const products = await Product.find({ category: category._id });
+
+    if (!products) {
+      return res.status(404).json({ message: 'Products not found' });
+    }
+
+    return res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getProductsSoldOut = async (req, res) => {
+  try {
+    const products = await Product.find({ stock: 0 });
+
+    if (!products) {
+      return res.status(404).json({ message: 'Products not found' });
+    }
+
+    return res.json(products);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const addProduct = async (req, res) => {
+  try {
+    let { name, description, price, stock, category } = req.body;
+
+    const categories = await Category.find({});
+    const categoryExists = await Category.findOne({ name: category });
+
+    if (!categoryExists) {
+      return res.status(400).json({
+        message: 'Category not found',
+        categoriesAvailable: categories.map((category) => category.name),
+      });
+    }
+
+    const products = await Product.find({});
+
+    const productAlreadyExists = products.some(
+      (product) => product.name === name,
+    );
+
+    if (productAlreadyExists) {
+      let productToUpdate = await Product.findOne({ name });
+
+      await Product.findOneAndUpdate(
+        { name },
+        {
+          stock: productToUpdate.stock + 1,
+        },
+        { new: true },
+      );
+
+      return res.send({
+        message: 'The product exists added +1 to this product',
+      });
+    }
+
+    const newProduct = new Product({
+      name,
+      description,
+      price,
+      stock,
+      category: categoryExists._id,
+    });
+
+    await newProduct.save();
+
+    return res.status(200).send('Product added succesfully');
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const updateProduct = async (req, res) => {
   try {
-    let { id } = req.params;
-    let data = req.body;
-    let updateProduct = await Product.findOneAndUpdate({ _id: id }, data, {
-      new: true,
-    });
-    if (!updateProduct)
-      return res
-        .status(404)
-        .send({ message: 'Product not found, not updated.' });
-    return res.send({
-      message: 'Product updated successfully.',
-      updateProduct,
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send({ message: 'Error updating product.', err });
-  }
-};
+    const { productId } = req.params;
+    const { name, description, price, stock, category } = req.body;
 
-export const changeStatus = async (req, res) => {
-  try {
-    let { id } = req.params;
-    let data = req.body;
-    data.changeStatus = false;
-    if (
-      data.name != null ||
-      data.description != null ||
-      data.type != null ||
-      data.price != null ||
-      data.dateCreation != null ||
-      data.dateModified != null
-    ) {
-      return res
-        .status(401)
-        .send({ message: 'You only can update the status.' });
+    const productToUpdate = await Product.findById(productId);
+
+    if (!productToUpdate) {
+      return res.status(404).json({ message: 'Product not found' });
     }
 
-    //Hace falta el checkUpdate
-    /* let update = checkUpdate(data, id)
-        if (!update) return res.status(400).send({ message: 'Have submitted some data that cannot be updated or missing data.' }) */
-    let updateProductFalse = await Product.findOneAndUpdate({ _id: id }, data, {
-      new: true,
-    });
-    if (!updateProductFalse)
-      return res
-        .status(404)
-        .send({ message: 'Product not found, not updated.' });
-    return res.send({
-      message: 'Product updated succesfully.',
-      updateProductFalse,
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send({ message: 'Error updating product.', err });
-  }
-};
+    if (category) {
+      const categories = await Category.find({});
+      const categoryExists = await Category.findOne({ name: category });
 
-export const searchFalseProducts = async (req, res) => {
-  try {
-    const falseProducts = await Product.find({ changeStatus: false });
-    if (falseProducts.length === 0) {
-      return res.status(404).json({ message: 'No false products.' });
+      if (!categoryExists) {
+        return res.status(400).json({
+          message: 'Category does not exist',
+          categoriesAvailable: categories.map((category) => category.name),
+        });
+      }
+
+      productToUpdate.category = categoryExists._id;
     }
-    res.status(200).json(falseProducts);
+
+    if (name) {
+      productToUpdate.name = name;
+    }
+
+    if (description) {
+      productToUpdate.description = description;
+    }
+
+    if (price) {
+      productToUpdate.price = price;
+    }
+
+    if (stock) {
+      productToUpdate.stock = stock;
+    }
+
+    await productToUpdate.save();
+
+    return res.json({ message: 'Product updated' });
   } catch (error) {
-    console.error('Error searching for products.', error);
-    res.status(500).json({ message: 'Internal Server Error.' });
+    res.status(500).json({ message: error.message });
   }
 };
 
-export const searchProduct = async (req, res) => {
+export const deleteProduct = async (req, res) => {
   try {
-    let { id } = req.params;
-    let products = await Product.findOne({ _id: id });
-    if (!products)
-      return res.status(404).send({ message: 'Product not found.' });
-    return res.status(200).send({ message: 'Product found.', products });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send({ message: 'Error searching product', err });
-  }
-};
+    const { productId } = req.params;
 
-export const getProduct = async (req, res) => {
-  try {
-    let products = await Product.find();
-    return res.send({ products });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send({ message: 'Error getting product.' });
+    const productToDelete = await Product.findById(productId);
+
+    if (!productToDelete) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    await Product.findOneAndDelete(productId);
+
+    return res.json({ message: 'Course deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

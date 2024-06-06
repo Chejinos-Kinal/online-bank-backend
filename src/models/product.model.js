@@ -27,18 +27,12 @@ const productSchema = new Schema(
       default: 0,
       required: false,
     },
-    // NOTE: This may be useful for future implementations
-    // category: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'Category',
-    //   required: true,
-    // },
-  },
-  {
-    timestamps: {
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category',
+      required: true,
     },
+    timestamps: true,
     versionKey: false,
   },
 );
