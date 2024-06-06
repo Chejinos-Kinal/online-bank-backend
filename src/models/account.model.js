@@ -14,7 +14,8 @@ const accountSchema = new Schema(
       required: true,
     },
     typeAccount: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'TypeAccount',
       required: true,
     },
   },

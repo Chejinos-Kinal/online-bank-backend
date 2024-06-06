@@ -6,6 +6,7 @@ import 'dotenv/config.js';
 
 import connection from './db/mongo.js';
 import { defaultAdmin } from './controllers/user.controller.js';
+import { defaultTypeAccount } from './controllers/typeAccount.controller.js';
 
 // NOTE: Routes
 import userRoutes from './routes/user.routes.js';
@@ -30,6 +31,7 @@ app.use('/typeAccount', typeAccountRoutes);
 connection()
   .then(() => {
     defaultAdmin();
+    defaultTypeAccount();
   })
   .catch((error) => {
     console.error(error);
