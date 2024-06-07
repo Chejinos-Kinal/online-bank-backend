@@ -15,6 +15,7 @@ import {
   purchase,
   removeFromCart,
   getPurchases,
+  getRecord,
 } from '../controllers/user.controller.js';
 
 import productsRoutes from './products.routes.js';
@@ -38,6 +39,7 @@ router.get('/getUsers', [validateJwt, isAdmin], getUsers);
 //Rutas User
 router.get('/getUserClient/:id', [validateJwt], getUserClient);
 router.put('/updateUserClient/:id', [validateJwt], updateUserClient);
+router.get('/getRecord', [validateJwt], getRecord);
 
 // Cart
 router.get('/cart', validateJwt, getCart);

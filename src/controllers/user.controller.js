@@ -5,6 +5,7 @@ import Account from '../models/account.model.js';
 import Product from '../models/product.model.js';
 import Purchase from '../models/purchase.model.js';
 import TypeAccount from '../models/typeAccount.model.js';
+import Movement from '../models/movements.model.js';
 import { encrypt, checkPassword } from '../utils/bcrypt.js';
 import { createToken } from '../utils/jwt.js';
 
@@ -132,13 +133,16 @@ export const getUsers = async (req, res) => {
 export const getUser = async (req, res) => {
   try {
     let userId = req.params.id;
+    let lastMovements = await Movement.find({ user: userId })
+      .sort({ createdAt: -1 })
+      .limit(5);
     let existingUser = await User.findOne({
       _id: userId,
       status: true,
     }).populate('idAccount', ['balance']);
     if (!existingUser)
       return res.status(404).send({ message: 'User not found' });
-    return res.send(existingUser);
+    return res.send({ existingUser, lastMovements });
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: 'Error getting user' });
@@ -178,12 +182,9 @@ export const updateUserClient = async (req, res) => {
 
 export const getUserClient = async (req, res) => {
   try {
-    let userId = req.params.id;
     let userIdL = req.user._id;
-    if (userIdL.toString() !== userId.toString())
-      return res.status(401).send({ message: 'You only can get your user' });
     let existingUser = await User.findOne({
-      _id: userId,
+      _id: userIdL,
       status: true,
     }).populate('idAccount', ['balance']);
     if (!existingUser)
@@ -192,6 +193,19 @@ export const getUserClient = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: 'Error getting user' });
+  }
+};
+
+export const getRecord = async (req, res) => {
+  try {
+    let userIdL = req.user._id;
+    let movements = await Movement.find({ user: userIdL })
+      .sort({ createdAt: -1 })
+      .populate('user', ['username']);
+    return res.send({ message: 'Your record', movements });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: 'Error getting record' });
   }
 };
 
