@@ -1,6 +1,7 @@
 import User from '../models/user.model.js';
 import { encrypt } from '../utils/bcrypt.js';
 
+// NOTE: Don't encrypt password on objects, `createAllUsers` function already does that
 export const users = [
   {
     name: 'Admin',

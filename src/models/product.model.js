@@ -38,4 +38,5 @@ const productSchema = new Schema(
     versionKey: false,
   },
 );
+
 export default model('Product', productSchema);
