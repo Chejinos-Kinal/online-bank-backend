@@ -28,7 +28,6 @@ app.use(morgan('dev'));
 
 // NOTE: Routes
 app.use('/user', userRoutes);
-app.use('/products', productsRoutes);
 app.use('/typeAccount', typeAccountRoutes);
 
 connection()

@@ -1,28 +1,40 @@
-'use strict';
+import mongoose from 'mongoose';
 
-import { Schema, model } from 'mongoose';
-
-const purchaseSchema = new Schema(
+const purchaseSchema = new mongoose.Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    products: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true,
-      },
-    ],
+    products: {
+      type: [
+        {
+          product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+          },
+          quantity: {
+            type: Number,
+            required: true,
+          },
+          subtotal: {
+            type: Number,
+            required: true,
+          },
+        },
+      ],
+      required: true,
+    },
+    total: {
+      type: Number,
+      required: true,
+    },
   },
   {
-    timestamps: {
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-    },
+    timestamps: true,
+    versionKey: false,
   },
 );
 
-export default model('Purchase', purchaseSchema);
+export default mongoose.model('Purchase', purchaseSchema);
