@@ -1,6 +1,6 @@
 'use strict';
 
-import Product from '../models/products.model.js';
+import Product from '../models/product.model.js';
 
 export const test = (req, res) => {
   return res.send({ message: 'Function test is running | Product' });

@@ -2,7 +2,13 @@
 
 import express from 'express';
 
-import { deleteTypeAccount, getTypeAccount, getTypeAccounts, saveTypeAccount, updateTypeAccount } from '../controllers/typeAccount.controller.js';
+import {
+  deleteTypeAccount,
+  getTypeAccount,
+  getTypeAccounts,
+  saveTypeAccount,
+  updateTypeAccount,
+} from '../controllers/typeAccount.controller.js';
 
 import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
