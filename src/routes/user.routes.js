@@ -40,12 +40,12 @@ router.get('/getUserClient/:id', [validateJwt], getUserClient);
 router.put('/updateUserClient/:id', [validateJwt], updateUserClient);
 
 // Cart
-router.get('/cart', isLoggedIn, getCart);
-router.post('/cart', isLoggedIn, addTocart);
-router.post('/cart/purchase', isLoggedIn, purchase);
-router.delete('/cart/delete/:productId', isLoggedIn, removeFromCart);
+router.get('/cart', /* isLoggedIn, */ getCart);
+router.post('/cart', /* isLoggedIn, */ addTocart);
+router.post('/cart/purchase', /* isLoggedIn, */ purchase);
+router.delete('/cart/delete/:productId', /* isLoggedIn, */ removeFromCart);
 
 // Purchases
-router.get('/purchases', isLoggedIn, getPurchases);
+router.get('/purchases', /* isLoggedIn, */ getPurchases);
 
 export default router;

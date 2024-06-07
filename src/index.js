@@ -13,8 +13,9 @@ import {
 
 // NOTE: Routes
 import userRoutes from './routes/user.routes.js';
-import productsRoutes from './routes/products.routes.js';
+/* import productsRoutes from './routes/products.routes.js'; */
 import typeAccountRoutes from './routes/typeAccount.routes.js';
+import movementRoutes from '../src/routes/movements.routes.js';
 
 const app = express();
 const port = process.env.PORT || 3200;
@@ -28,7 +29,9 @@ app.use(morgan('dev'));
 
 // NOTE: Routes
 app.use('/user', userRoutes);
+/* app.use('/products', productsRoutes); */
 app.use('/typeAccount', typeAccountRoutes);
+app.use('/movement', movementRoutes);
 
 connection()
   .then(() => {

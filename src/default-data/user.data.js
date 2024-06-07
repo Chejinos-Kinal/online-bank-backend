@@ -23,7 +23,7 @@ export const users = [
     address: 'Cale 123',
     phoneNumber: '1235678',
     email: 'adn@gmail.com',
-    password: await encrypt('ADMNB'),
+    password: await encrypt('ADMINB'),
     nameJob: 'Plomero',
     monthlySalary: 100,
     role: 'ADMIN',
