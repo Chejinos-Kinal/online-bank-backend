@@ -12,12 +12,16 @@ import {
 
 import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
-const api = express.Router();
+const router = express.Router();
 
-api.post('/saveTypeAccount', [validateJwt, isAdmin], saveTypeAccount);
-api.delete('/deleteTypeAccount/:id', [validateJwt, isAdmin], deleteTypeAccount);
-api.put('/updateTypeAccount/:id', [validateJwt, isAdmin], updateTypeAccount);
-api.get('/getTypeAccount', [validateJwt, isAdmin], getTypeAccount);
-api.get('/getTypeAccounts', [validateJwt, isAdmin], getTypeAccounts);
+router.post('/saveTypeAccount', [validateJwt, isAdmin], saveTypeAccount);
+router.delete(
+  '/deleteTypeAccount/:id',
+  [validateJwt, isAdmin],
+  deleteTypeAccount,
+);
+router.put('/updateTypeAccount/:id', [validateJwt, isAdmin], updateTypeAccount);
+router.get('/getTypeAccount', [validateJwt, isAdmin], getTypeAccount);
+router.get('/getTypeAccounts', [validateJwt, isAdmin], getTypeAccounts);
 
-export default api;
+export default router;

@@ -1,29 +1,40 @@
 'use strict';
 
-import { Router } from 'express';
-
-import {
-  saveProduct,
-  test,
-  updateProduct,
-  changeStatus,
-  searchProduct,
-  getProduct,
-  searchFalseProducts,
-} from '../controllers/products.controller.js';
-
+import express from 'express';
 import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
-const api = Router();
+// Controllers
+import {
+  getProducts,
+  getProductsMostSold,
+  searchProducts,
+  getProductsByCategory,
+  getProductsSoldOut,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+} from '../controllers/product.controller.js';
 
-api.get('/test', test);
-api.post('/saveProduct', [validateJwt, isAdmin], saveProduct);
-api.put('/updateProduct/:id', [validateJwt, isAdmin], updateProduct);
-api.get('/searchFalseProducts', [validateJwt, isAdmin], searchFalseProducts);
-api.put('/changeStatus/:id', [validateJwt, isAdmin], changeStatus);
-api.get('/searchProduct/:id', [validateJwt, isAdmin], searchProduct);
-api.get('/getProduct', [validateJwt], getProduct);
+const router = express.Router();
 
-api.get('/test', test);
+// Public routes
+router.get('/products', validateJwt, getProducts);
+router.get('/products/most-sold', validateJwt, getProductsMostSold);
+router.post('/search/products', validateJwt, searchProducts);
+router.get(
+  '/products/category/:categoryName',
+  validateJwt,
+  getProductsByCategory,
+);
+router.get('/products/sold-out', validateJwt, getProductsSoldOut);
 
-export default api;
+// Admin routes
+router.post('/add/product', [validateJwt, isAdmin], addProduct);
+router.put('/update/product/:productId', [validateJwt, isAdmin], updateProduct);
+router.delete(
+  '/delete/product/:productId',
+  [validateJwt, isAdmin],
+  deleteProduct,
+);
+
+export default router;

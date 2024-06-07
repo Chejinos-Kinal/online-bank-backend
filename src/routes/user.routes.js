@@ -10,23 +10,42 @@ import {
   login,
   updateUser,
   updateUserClient,
+  getCart,
+  addTocart,
+  purchase,
+  removeFromCart,
+  getPurchases,
 } from '../controllers/user.controller.js';
+
+import productsRoutes from './products.routes.js';
+
 import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
-const api = express.Router();
+const router = express.Router();
+
+router.use(productsRoutes);
 
 //Rutas publicas
-api.post('/login', login);
+router.post('/login', login);
 
 //Rutas Admin
-api.post('/createUser', [validateJwt, isAdmin], createUser);
-api.put('/deleteUser/:id', [validateJwt, isAdmin], deleteUser);
-api.put('/updateUser/:id', [validateJwt, isAdmin], updateUser);
-api.get('/getUser/:id', [validateJwt, isAdmin], getUser);
-api.get('/getUsers', [validateJwt, isAdmin], getUsers);
+router.post('/createUser', [validateJwt, isAdmin], createUser);
+router.put('/deleteUser/:id', [validateJwt, isAdmin], deleteUser);
+router.put('/updateUser/:id', [validateJwt, isAdmin], updateUser);
+router.get('/getUser/:id', [validateJwt, isAdmin], getUser);
+router.get('/getUsers', [validateJwt, isAdmin], getUsers);
 
 //Rutas User
-api.get('/getUserClient/:id', [validateJwt], getUserClient);
-api.put('/updateUserClient/:id', [validateJwt], updateUserClient);
+router.get('/getUserClient/:id', [validateJwt], getUserClient);
+router.put('/updateUserClient/:id', [validateJwt], updateUserClient);
 
-export default api;
+// Cart
+router.get('/cart', isLoggedIn, getCart);
+router.post('/cart', isLoggedIn, addTocart);
+router.post('/cart/purchase', isLoggedIn, purchase);
+router.delete('/cart/delete/:productId', isLoggedIn, removeFromCart);
+
+// Purchases
+router.get('/purchases', isLoggedIn, getPurchases);
+
+export default router;

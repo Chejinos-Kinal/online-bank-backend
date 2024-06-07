@@ -225,6 +225,20 @@ export const login = async (req, res) => {
 };
 
 // NOTE: Cart related functions
+
+export const getCart = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.user._id }).populate({
+      path: 'cart.product',
+      select: 'name price',
+    });
+
+    return res.json(user.cart);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const addTocart = async (req, res) => {
   try {
     const { productId, quantity } = req.body;
