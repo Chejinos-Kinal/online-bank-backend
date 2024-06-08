@@ -15,6 +15,10 @@ import {
 import userRoutes from './routes/user.routes.js';
 import typeAccountRoutes from './routes/typeAccount.routes.js';
 import movementRoutes from '../src/routes/movements.routes.js';
+import favoriteAccountRoutes from '../src/routes/favoriteAccount.routes.js';
+import productsRoutes from '../src/routes/products.routes.js';
+import category from '../src/routes/category.routes.js';
+import accountRoutes from '../src/routes/account.routes.js';
 
 const app = express();
 const port = process.env.PORT || 3200;
@@ -31,6 +35,10 @@ app.use(morgan('dev'));
 app.use('/user', userRoutes);
 app.use('/typeAccount', typeAccountRoutes);
 app.use('/movement', movementRoutes);
+app.use('/favoriteAccount', favoriteAccountRoutes);
+app.use('/products', productsRoutes);
+app.use('/category', category);
+app.use('/account', accountRoutes);
 
 connection()
   .then(() => {
