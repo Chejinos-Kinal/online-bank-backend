@@ -10,6 +10,10 @@ import {
   typeAccounts,
   createAllTypeAccounts,
 } from './default-data/typeAccount.data.js';
+import {
+  createAllCategories,
+  categories,
+} from './default-data/category.data.js';
 
 // NOTE: Routes
 import userRoutes from './routes/user.routes.js';
@@ -36,6 +40,7 @@ connection()
   .then(() => {
     createAllUsers(users);
     createAllTypeAccounts(typeAccounts);
+    createAllCategories(categories);
   })
   .catch((error) => {
     console.error(error);
