@@ -163,11 +163,9 @@ export const changeStatus = async (req, res) => {
 
     // Permite la actualización solo si la diferencia es menor a una hora (3600000 ms)
     if (timeDifference > 3600000) {
-      return res
-        .status(400)
-        .send({
-          message: 'Status can only be changed within one hour of creation.',
-        });
+      return res.status(400).send({
+        message: 'Status can only be changed within one hour of creation.',
+      });
     }
 
     // Actualiza el estado del movimiento
@@ -177,12 +175,10 @@ export const changeStatus = async (req, res) => {
       { new: true },
     );
 
-    return res
-      .status(200)
-      .send({
-        message: 'Movement status updated successfully.',
-        updatedMovement,
-      });
+    return res.status(200).send({
+      message: 'Movement status updated successfully.',
+      updatedMovement,
+    });
   } catch (err) {
     console.error(err);
     return res
