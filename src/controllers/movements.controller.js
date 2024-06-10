@@ -162,9 +162,9 @@ export const changeStatus = async (req, res) => {
     let timeDifference = now - createdAt;
 
     // Permite la actualización solo si la diferencia es menor a una hora (3600000 ms)
-    if (timeDifference > 3600000) {
+    if (timeDifference > 300000) {
       return res.status(400).send({
-        message: 'Status can only be changed within one hour of creation.',
+        message: 'Status can only be changed within five minutes of creation.',
       });
     }
 

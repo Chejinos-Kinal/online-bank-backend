@@ -4,7 +4,8 @@ import express from 'express';
 
 import {
   addMovement,
-  /* deleteMovement, */ getMovements,
+  changeStatus,
+  getMovements,
   getMyMovements,
   updateMovement,
 } from '../controllers/movements.controller.js';
@@ -15,7 +16,7 @@ const api = express.Router();
 
 api.post('/addMovement', [validateJwt], addMovement);
 api.put('/updateMovement/:id', [validateJwt, isAdmin], updateMovement);
-/* api.delete('/deleteMovement/:id', [validateJwt, isAdmin], deleteMovement) */
+api.delete('/changeStatus/:id', [validateJwt, isAdmin], changeStatus);
 api.get('/getMovements', [validateJwt], getMovements);
 api.get('/getMyMovements', [validateJwt], getMyMovements);
 export default api;
