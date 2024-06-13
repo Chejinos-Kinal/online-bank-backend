@@ -1,5 +1,5 @@
-import Product from '../models/product.model';
-import Category from '../models/category.model';
+import Product from '../models/product.model.js';
+import Category from '../models/category.model.js';
 
 export const products = [
   {
@@ -8,7 +8,7 @@ export const products = [
     price: 1000,
     stock: 10,
     timeSold: 0,
-    category: await Category.findOne({ name: 'Electronics' }).select('_id'),
+    category: 'Electronics',
   },
   {
     name: 'T-shirt',
@@ -16,7 +16,7 @@ export const products = [
     price: 20,
     stock: 100,
     timeSold: 0,
-    category: await Category.findOne({ name: 'Clothing' }).select('_id'),
+    category: 'Clothing',
   },
   {
     name: 'Soccer ball',
@@ -24,7 +24,7 @@ export const products = [
     price: 50,
     stock: 50,
     timeSold: 0,
-    category: await Category.findOne({ name: 'Sports' }).select('_id'),
+    category: 'Sports',
   },
   {
     name: 'Chair',
@@ -32,7 +32,7 @@ export const products = [
     price: 100,
     stock: 20,
     timeSold: 0,
-    category: await Category.findOne({ name: 'Home' }).select('_id'),
+    category: 'Home',
   },
 ];
 
@@ -45,7 +45,14 @@ export const createAllProducts = async (products) => {
 
       if (existingProduct) return console.log('Product already exists');
 
-      let product = new Product(products[i]);
+      let product = new Product({
+        name: products[i].name,
+        description: products[i].description,
+        price: products[i].price,
+        stock: products[i].stock,
+        timeSold: products[i].timeSold,
+        category: await Category.findOne({ name: products[i].category }),
+      });
 
       await product.save();
     }
