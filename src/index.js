@@ -14,6 +14,7 @@ import {
   createAllCategories,
   categories,
 } from './default-data/category.data.js';
+import { createAllProducts, products } from './default-data/products.data.js';
 
 // NOTE: Routes
 import userRoutes from './routes/user.routes.js';
@@ -41,6 +42,7 @@ connection()
     createAllUsers(users);
     createAllTypeAccounts(typeAccounts);
     createAllCategories(categories);
+    createAllProducts(products);
   })
   .catch((error) => {
     console.error(error);
