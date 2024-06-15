@@ -18,7 +18,6 @@ import { createAllProducts, products } from './default-data/products.data.js';
 
 // NOTE: Routes
 import userRoutes from './routes/user.routes.js';
-import typeAccountRoutes from './routes/typeAccount.routes.js';
 
 const app = express();
 const port = process.env.PORT || 3200;
@@ -33,7 +32,6 @@ app.use(morgan('dev'));
 // NOTE: Routes
 // NOTE: Product Routes are called from /user
 app.use('/user', userRoutes);
-app.use('/typeAccount', typeAccountRoutes);
 
 connection()
   .then(() => {
