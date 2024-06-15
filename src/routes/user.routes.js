@@ -18,12 +18,19 @@ import {
 } from '../controllers/user.controller.js';
 
 import productsRoutes from './products.routes.js';
+import movementsRoutes from './movements.routes.js';
+import typeAccountRoutes from './typeAccount.routes.js';
+import categoriesRoutes from './category.routes.js';
 
 import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
 const router = express.Router();
 
+// NOTE: this routes are called from /user
 router.use(productsRoutes);
+router.use(categoriesRoutes);
+router.use('/movement', movementsRoutes);
+router.use('/typeAccount', typeAccountRoutes);
 
 //Rutas publicas
 router.post('/login', login);
