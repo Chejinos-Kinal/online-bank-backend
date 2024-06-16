@@ -21,6 +21,8 @@ import productsRoutes from './products.routes.js';
 import movementsRoutes from './movements.routes.js';
 import typeAccountRoutes from './typeAccount.routes.js';
 import categoriesRoutes from './category.routes.js';
+import favoriteAccountRoutes from './favoriteAccount.routes.js';
+import accountRoutes from './account.routes.js';
 
 import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
@@ -31,6 +33,8 @@ router.use(productsRoutes);
 router.use(categoriesRoutes);
 router.use('/movement', movementsRoutes);
 router.use('/typeAccount', typeAccountRoutes);
+router.use('/account', accountRoutes);
+router.use('/favoriteAccount', favoriteAccountRoutes);
 
 //Rutas publicas
 router.post('/login', login);
