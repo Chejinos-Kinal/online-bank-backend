@@ -10,15 +10,14 @@ import {
   typeAccounts,
   createAllTypeAccounts,
 } from './default-data/typeAccount.data.js';
+import {
+  createAllCategories,
+  categories,
+} from './default-data/category.data.js';
+import { createAllProducts, products } from './default-data/products.data.js';
 
 // NOTE: Routes
 import userRoutes from './routes/user.routes.js';
-import typeAccountRoutes from './routes/typeAccount.routes.js';
-import movementRoutes from '../src/routes/movements.routes.js';
-import favoriteAccountRoutes from '../src/routes/favoriteAccount.routes.js';
-import productsRoutes from '../src/routes/products.routes.js';
-import category from '../src/routes/category.routes.js';
-import accountRoutes from '../src/routes/account.routes.js';
 
 const app = express();
 const port = process.env.PORT || 3200;
@@ -33,17 +32,13 @@ app.use(morgan('dev'));
 // NOTE: Routes
 // NOTE: Product Routes are called from /user
 app.use('/user', userRoutes);
-app.use('/typeAccount', typeAccountRoutes);
-app.use('/movement', movementRoutes);
-app.use('/favoriteAccount', favoriteAccountRoutes);
-app.use('/products', productsRoutes);
-app.use('/category', category);
-app.use('/account', accountRoutes);
 
 connection()
   .then(() => {
     createAllUsers(users);
     createAllTypeAccounts(typeAccounts);
+    createAllCategories(categories);
+    createAllProducts(products);
   })
   .catch((error) => {
     console.error(error);

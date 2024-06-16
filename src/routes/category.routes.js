@@ -1,8 +1,8 @@
 'use strict';
 
-import { validateJwt } from '../middlewares/validate-jwt.js';
 import express from 'express';
 
+// Controllers
 import {
   getCategories,
   addCategory,
@@ -10,11 +10,21 @@ import {
   deleteCategory,
 } from '../controllers/category.controller.js';
 
-const api = express.Router();
+import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
-api.post('/addCategory', [validateJwt], addCategory);
-api.put('/updateCategory/:id', [validateJwt], updateCategory);
-api.delete('/deleteCategory/:id', [validateJwt], deleteCategory);
-api.get('/getCategories', [validateJwt], getCategories);
+const router = express.Router();
 
-export default api;
+router.get('/categories', validateJwt, getCategories);
+router.post('/add/category', [validateJwt, isAdmin], addCategory);
+router.put(
+  '/update/category/:categoryId',
+  [validateJwt, isAdmin],
+  updateCategory,
+);
+router.delete(
+  '/delete/category/:categoryId',
+  [validateJwt, isAdmin],
+  deleteCategory,
+);
+
+export default router;
