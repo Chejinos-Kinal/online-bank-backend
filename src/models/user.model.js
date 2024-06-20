@@ -17,12 +17,10 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    // FIXME: This must be unique: true but the problem is we must create and then add the idAccount (_id) to the user
     idAccount: {
       type: Schema.Types.ObjectId,
       ref: 'Account',
       required: false,
-      unique: false,
     },
     DPI: {
       type: String,
