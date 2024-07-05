@@ -7,7 +7,7 @@ import {
   getAccounts,
   updateAccount,
   deleteAccount,
-  getAccount
+  getAccount,
 } from '../controllers/account.controller.js';
 
 const api = express.Router();
@@ -15,6 +15,6 @@ const api = express.Router();
 api.get('/', [validateJwt], getAccounts);
 api.put('/update/account/:id', [validateJwt], updateAccount);
 api.delete('/delete/account/:id', [validateJwt], deleteAccount);
-api.get('/get/account/:idUser', [validateJwt], getAccount)
+api.get('/get/account/:idUser', [validateJwt], getAccount);
 
 export default api;

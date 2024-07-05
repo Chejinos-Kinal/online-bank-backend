@@ -50,15 +50,16 @@ export const deleteAccount = async (req, res) => {
   }
 };
 
-export const getAccount = async(req, res) => {
+export const getAccount = async (req, res) => {
   try {
-    let {idUser} = req.params
-    let idAccount = getIdAccountUser(idUser)
-    let account = await Account.findOne({_id: idAccount})
-    if(!account) return res.status(404).send({message: 'cuenta no encontrada'})
-    return res.json({account})
+    let { idUser } = req.params;
+    let idAccount = getIdAccountUser(idUser);
+    let account = await Account.findOne({ _id: idAccount });
+    if (!account)
+      return res.status(404).send({ message: 'cuenta no encontrada' });
+    return res.json({ account });
   } catch (err) {
-    console.error(err)
-    return res.status(500).send()
+    console.error(err);
+    return res.status(500).send();
   }
-}
+};
