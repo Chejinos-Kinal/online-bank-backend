@@ -36,11 +36,11 @@ app.use('/user', userRoutes);
 app.use('/admin', adminRoutes);
 
 connection()
-  .then(() => {
-    createAllUsers(users);
-    createAllTypeAccounts(typeAccounts);
-    createAllCategories(categories);
-    createAllProducts(products);
+  .then(async () => {
+    await createAllUsers(users);
+    await createAllTypeAccounts(typeAccounts);
+    await createAllCategories(categories);
+    await createAllProducts(products);
   })
   .catch((error) => {
     console.error(error);
