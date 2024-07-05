@@ -52,7 +52,7 @@ export const deleteAccount = async (req, res) => {
 
 export const getAccount = async (req, res) => {
   try {
-    let { idUser } = req.params;
+    let idUser = req.user._id;
     let idAccount = getIdAccountUser(idUser);
     let account = await Account.findOne({ _id: idAccount });
     if (!account)
