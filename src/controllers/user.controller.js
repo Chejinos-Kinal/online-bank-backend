@@ -8,6 +8,17 @@ import TypeAccount from '../models/typeAccount.model.js';
 import { encrypt, checkPassword } from '../utils/bcrypt.js';
 import { createToken } from '../utils/jwt.js';
 
+export const getIdAccountUser = async (idUser) => {
+  try {
+    let user = await User.findOne({ _id: idUser });
+    if (!user) console.log('Este no es un cliente');
+    return user.idAccount;
+  } catch (err) {
+    console.error(err);
+    console.log('Error al obtener el id de la cuenta del usuario');
+  }
+};
+
 const generateAccountNumber = () => {
   let accountNumber = '';
   for (let i = 0; i < 11; i++) {
