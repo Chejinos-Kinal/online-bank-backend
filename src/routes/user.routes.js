@@ -10,6 +10,7 @@ import {
   purchase,
   removeFromCart,
   getPurchases,
+  getUser,
 } from '../controllers/user.controller.js';
 
 import productsRoutes from './products.routes.js';
@@ -35,6 +36,7 @@ router.post('/login', login);
 //Rutas User
 router.get('/getUserClient/:id', [validateJwt], getUserClient);
 router.put('/updateUserClient/:id', [validateJwt], updateUserClient);
+router.get('/getUser', [validateJwt], getUser);
 
 // Cart
 router.get('/cart', validateJwt, getCart);

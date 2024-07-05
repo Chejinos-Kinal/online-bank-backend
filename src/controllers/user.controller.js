@@ -142,7 +142,7 @@ export const getUsers = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    let userId = req.params.id;
+    let userId = req.user._id;
     let existingUser = await User.findOne({
       _id: userId,
       status: true,
