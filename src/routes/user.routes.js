@@ -2,13 +2,8 @@
 
 import express from 'express';
 import {
-  createUser,
-  deleteUser,
-  getUser,
   getUserClient,
-  getUsers,
   login,
-  updateUser,
   updateUserClient,
   getCart,
   addTocart,
@@ -19,7 +14,6 @@ import {
 
 import productsRoutes from './products.routes.js';
 import movementsRoutes from './movements.routes.js';
-import typeAccountRoutes from './typeAccount.routes.js';
 import categoriesRoutes from './category.routes.js';
 import favoriteAccountRoutes from './favoriteAccount.routes.js';
 import accountRoutes from './account.routes.js';
@@ -29,22 +23,14 @@ import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 const router = express.Router();
 
 // NOTE: this routes are called from /user
-router.use(productsRoutes);
-router.use(categoriesRoutes);
-router.use('/movement', movementsRoutes);
-router.use('/typeAccount', typeAccountRoutes);
-router.use('/account', accountRoutes);
-router.use('/favoriteAccount', favoriteAccountRoutes);
+router.use('/products', productsRoutes);
+router.use('/categories', categoriesRoutes);
+router.use('/movements', movementsRoutes);
+router.use('/accounts', accountRoutes);
+router.use('/favoriteAccounts', favoriteAccountRoutes);
 
 //Rutas publicas
 router.post('/login', login);
-
-//Rutas Admin
-router.post('/createUser', [validateJwt, isAdmin], createUser);
-router.put('/deleteUser/:id', [validateJwt, isAdmin], deleteUser);
-router.put('/updateUser/:id', [validateJwt, isAdmin], updateUser);
-router.get('/getUser/:id', [validateJwt, isAdmin], getUser);
-router.get('/getUsers', [validateJwt, isAdmin], getUsers);
 
 //Rutas User
 router.get('/getUserClient/:id', [validateJwt], getUserClient);

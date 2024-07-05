@@ -14,17 +14,6 @@ import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
 const router = express.Router();
 
-router.get('/categories', validateJwt, getCategories);
-router.post('/add/category', [validateJwt, isAdmin], addCategory);
-router.put(
-  '/update/category/:categoryId',
-  [validateJwt, isAdmin],
-  updateCategory,
-);
-router.delete(
-  '/delete/category/:categoryId',
-  [validateJwt, isAdmin],
-  deleteCategory,
-);
+router.get('/', validateJwt, getCategories);
 
 export default router;

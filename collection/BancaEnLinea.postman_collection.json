@@ -1,0 +1,1527 @@
+{
+	"info": {
+		"_postman_id": "42ff4360-4335-408a-8441-58cbcfce5f92",
+		"name": "BancaEnLinea",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13659864",
+		"_collection_link": "https://blue-robot-266534.postman.co/workspace/Team-Workspace~9f03431c-8ee6-4cbf-8cf2-16c92f71b2ca/collection/13659864-42ff4360-4335-408a-8441-58cbcfce5f92?action=share&source=collection_link&creator=13659864"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "cart",
+					"item": [
+						{
+							"name": "getCart",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/cart",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addToCart",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "productId",
+											"value": "65eb9d34f7a7f599e75a7cbf",
+											"type": "text"
+										},
+										{
+											"key": "quantity",
+											"value": "27",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base-url}}/user/cart",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "purchaseCart",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/cart/purchase",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"cart",
+										"purchase"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteProductCart",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/cart/delete/:productId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"cart",
+										"delete",
+										":productId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "65eabb9f075c46f9244aea1f"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "purchases",
+					"item": [
+						{
+							"name": "getPurchasesHistory",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/purchases",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"purchases"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "getProducts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/products/",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getProductsMostSold",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/products/most-sold",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"products",
+										"most-sold"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "searchProducts",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "La",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base-url}}/user/products/search",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"products",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getProductsByCategory",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "La",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base-url}}/user/products/category/:categoryName",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"products",
+										"category",
+										":categoryName"
+									],
+									"variable": [
+										{
+											"key": "categoryName",
+											"value": "General"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getProductsSoldOut",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/products/sold-out",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"products",
+										"sold-out"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "movement",
+					"item": [
+						{
+							"name": "getMovements",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-user}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/movements/",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"movements",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getMyMovements",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-user}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/movements/getMyMovements",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"movements",
+										"getMyMovements"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addMovement",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "{{base-url}}/user/movements/addMovement",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"movements",
+										"addMovement"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "category",
+					"item": [
+						{
+							"name": "getCategories",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/categories/",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"categories",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "favoriteAccount",
+					"item": [
+						{
+							"name": "getFavoriteAccount",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-user}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/favoriteAccounts/",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"favoriteAccounts",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addFavoriteAccount",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-user}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/favoriteAccounts/save/favorite/account",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"favoriteAccounts",
+										"save",
+										"favorite",
+										"account"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateFavoriteAccount",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "tokeb",
+										"value": "{{token-user}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/favoriteAccounts/update/favorite/account/:id",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"favoriteAccounts",
+										"update",
+										"favorite",
+										"account",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteFavoriteAccount",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-user}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/favoriteAccounts/delete/favorite/account/:id",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"favoriteAccounts",
+										"delete",
+										"favorite",
+										"account",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "account",
+					"item": [
+						{
+							"name": "getAccounts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-user}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/accounts/",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"accounts",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateAccount",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-user}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/accounts/update/account/:id",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"accounts",
+										"update",
+										"account",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteAccount",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-user}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/accounts/delete/account/:id",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"accounts",
+										"delete",
+										"account",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "D",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ADMNB",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/user/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-admin}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Franco",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Paiz",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "fpaiz",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "fpaiz@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "DPI",
+									"value": "223344556677",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Guatemala zona12, capital",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "22334455",
+									"type": "text"
+								},
+								{
+									"key": "nameJob",
+									"value": "Informático",
+									"type": "text"
+								},
+								{
+									"key": "monthlySalary",
+									"value": "10000",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "USER",
+									"type": "text"
+								},
+								{
+									"key": "typeAccount",
+									"value": "666764948596f8922158fb4c",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/user/register?surname=Paiz&username=fpaiz&DPI=223344556677&address=Santa Isabel, Villa Nueva&phoneNumber=33442211&nameJob=Informático&monthlySalary=10000&role=USER&typeAccount=666764948596f8922158fb4c",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Franco",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Paiz"
+								},
+								{
+									"key": "username",
+									"value": "fpaiz"
+								},
+								{
+									"key": "DPI",
+									"value": "223344556677"
+								},
+								{
+									"key": "address",
+									"value": "Santa Isabel, Villa Nueva"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "33442211"
+								},
+								{
+									"key": "nameJob",
+									"value": "Informático"
+								},
+								{
+									"key": "monthlySalary",
+									"value": "10000"
+								},
+								{
+									"key": "role",
+									"value": "USER"
+								},
+								{
+									"key": "typeAccount",
+									"value": "666764948596f8922158fb4c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token-admin}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Franco Alejandro",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/user/updateUser/:id",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"user",
+								"updateUser",
+								":id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "666773b00951fbe8469b7b3d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "product",
+					"item": [
+						{
+							"name": "getProducts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/products",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Keyboard",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Keychron",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "200",
+											"type": "text"
+										},
+										{
+											"key": "stock",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Technology",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base-url}}/admin/products/add/product",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"products",
+										"add",
+										"product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Laptop",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "description",
+											"value": "Update test",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "2000",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "stock",
+											"value": "99",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Technology",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base-url}}/admin/products/update/product/:productId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"products",
+										"update",
+										"product",
+										":productId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "65eb93ad81d0166ea2b19144"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/admin/products/delete/product/:productId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"products",
+										"delete",
+										"product",
+										":productId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "category",
+					"item": [
+						{
+							"name": "getCategories",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-temp}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/user/categories/",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"user",
+										"categories",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addCategory",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/admin/categories/add/category",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										"add",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateCategory",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/admin/categories/update/category/:categoryId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										"update",
+										"category",
+										":categoryId"
+									],
+									"variable": [
+										{
+											"key": "categoryId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteCategory",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/admin/categories/delete/category/:categoryId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										"delete",
+										"category",
+										":categoryId"
+									],
+									"variable": [
+										{
+											"key": "categoryId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "movement",
+					"item": [
+						{
+							"name": "updateMovement",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/admin/movements/update/movement/:movementId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"movements",
+										"update",
+										"movement",
+										":movementId"
+									],
+									"variable": [
+										{
+											"key": "movementId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "changeStatus",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/admin/movements/change/status/:movementId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"movements",
+										"change",
+										"status",
+										":movementId"
+									],
+									"variable": [
+										{
+											"key": "movementId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "typeAccount",
+					"item": [
+						{
+							"name": "getTypeAccount",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/admin/typeAccount/get/TypeAccount",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"typeAccount",
+										"get",
+										"TypeAccount"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTypeAccounts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/admin/typeAccount/get/TypeAccounts",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"typeAccount",
+										"get",
+										"TypeAccounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "saveTypeAccount",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/admin/typeAccount/save/typeAccount",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"typeAccount",
+										"save",
+										"typeAccount"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateTypeAccount",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/admin/typeAccount/update/typeAccount/:typeAccountId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"typeAccount",
+										"update",
+										"typeAccount",
+										":typeAccountId"
+									],
+									"variable": [
+										{
+											"key": "typeAccountId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteTypeAccount",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token-admin}}"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/admin/typeAccount/delete/typeAccount/:typeAccountId",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"typeAccount",
+										"delete",
+										"typeAccount",
+										":typeAccountId"
+									],
+									"variable": [
+										{
+											"key": "typeAccountId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "getAllUsers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/admin/users/",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/admin/users/user/:id",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/admin/users/create/user",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"create",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUser",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/admin/users/update/user/:id",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"update",
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUser",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/admin/users/delete/user/:id",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"delete",
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.globals.set(\"base-url\", \"http://localhost:3000\");",
+					"pm.globals.set(\"token-user\", \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWViOWQzNGY3YTdmNTk5ZTc1YTdjYWQiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzA5OTQwMDk2LCJleHAiOjE3MTI1MzIwOTZ9.webFshn0ziqhtJrm1m8iA4ybWa6TQOgtrc2jNa9e9XY\");",
+					"pm.globals.set(\"token-admin\", \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjY3NjQ5NDg1OTZmODkyMjE1OGZiNGUiLCJ1c2VybmFtZSI6IkQiLCJuYW1lIjoiQW1pbiIsInN1cm5hbWUiOiJEZmF1bHQiLCJyb2xlIjoiQURNSU4iLCJEUEkiOiIxMjM0Njc4OTAxMDkiLCJpYXQiOjE3MTgwNTYyNjYsImV4cCI6MTcxODE0MjY2Nn0.ufXdTBTy7ZVkXEV-eiilSUC8qt-mhs8LzS95uDd5blw\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

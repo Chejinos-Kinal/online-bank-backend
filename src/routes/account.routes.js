@@ -11,8 +11,8 @@ import {
 
 const api = express.Router();
 
-api.get('/getAccounts', [validateJwt], getAccounts);
-api.put('/updateAccount/:id', [validateJwt], updateAccount);
-api.delete('/deleteAccount/:id', [validateJwt], deleteAccount);
+api.get('/', [validateJwt], getAccounts);
+api.put('/update/account/:id', [validateJwt], updateAccount);
+api.delete('/delete/account/:id', [validateJwt], deleteAccount);
 
 export default api;

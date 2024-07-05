@@ -12,9 +12,13 @@ import {
 
 const api = express.Router();
 
-api.post('/saveFavoriteAccount', [validateJwt], saveFavoriteAccount);
-api.put('/updateFavoriteAccount/:id', [validateJwt], updateFavoriteAccount);
-api.delete('/deleteFavoriteAccount/:id', [validateJwt], deleteFavoriteAccount);
-api.get('/getFavoriteAccount', [validateJwt], getFavoriteAccount);
+api.get('/', [validateJwt], getFavoriteAccount);
+api.post('/save/favorite/account', [validateJwt], saveFavoriteAccount);
+api.put('/update/favorite/account/:id', [validateJwt], updateFavoriteAccount);
+api.delete(
+  '/delete/favorite/account/:id',
+  [validateJwt],
+  deleteFavoriteAccount,
+);
 
 export default api;
