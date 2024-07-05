@@ -9,6 +9,11 @@ export const test = (req, res) => {
 export const saveFavoriteAccount = async (req, res) => {
   try {
     const data = req.body;
+
+    let id = req.user._id;
+
+    data.idUser = id;
+
     const favoriteAccount = new FavoriteAccount(data);
     await favoriteAccount.save();
     return res

@@ -7,6 +7,7 @@ import categoryRoutes from './category.routes.js';
 import movementsRoutes from './movements.routes.js';
 import typeAccountRoutes from './typeAccount.routes.js';
 import userRoutes from './user.routes.js';
+import favoriteRoutes from './favoriteAccount.routes.js';
 
 const router = express.Router();
 
@@ -24,5 +25,7 @@ router.use('/movements', movementsRoutes);
 
 // NOTE: type account routes
 router.use('/typeAccount', typeAccountRoutes);
+
+router.use('/favoriteAccount', favoriteRoutes);
 
 export default router;
