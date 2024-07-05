@@ -10,6 +10,8 @@ import {
   updateUser,
 } from '../../controllers/user.controller.js';
 
+const router = express.Router();
+
 //Rutas Admin
 router.get('/', [validateJwt, isAdmin], getUsers);
 router.get('/user/:id', [validateJwt, isAdmin], getUser);
