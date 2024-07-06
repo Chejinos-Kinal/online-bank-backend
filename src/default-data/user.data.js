@@ -23,7 +23,7 @@ export const users = [
     DPI: '123467890109',
     address: 'Cale 123',
     phoneNumber: '1235678',
-    email: ' user@gmail.com',
+    email: 'user@gmail.com',
     password: '123',
     nameJob: 'user',
     monthlySalary: 100,
