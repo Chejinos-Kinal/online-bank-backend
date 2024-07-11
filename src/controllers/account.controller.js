@@ -1,6 +1,7 @@
 'use strict';
 
 import Account from '../models/account.model.js';
+import User from '../models/user.model.js';
 
 export const getAccounts = async (req, res) => {
   try {
@@ -46,5 +47,21 @@ export const deleteAccount = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Error deleting account.', error });
+  }
+};
+
+export const getAccount = async (req, res) => {
+  try {
+    let idUser = req.user._id;
+    let user = await User.findOne({ _id: idUser });
+    let account = await Account.findOne({ _id: user.idAccount });
+
+    if (!account)
+      return res.status(404).send({ message: 'cuenta no encontrada' });
+
+    return res.json({ account });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send();
   }
 };
