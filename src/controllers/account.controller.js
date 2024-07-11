@@ -55,8 +55,10 @@ export const getAccount = async (req, res) => {
     let idUser = req.user._id;
     let idAccount = getIdAccountUser(idUser);
     let account = await Account.findOne({ _id: idAccount });
+
     if (!account)
       return res.status(404).send({ message: 'cuenta no encontrada' });
+
     return res.json({ account });
   } catch (err) {
     console.error(err);
