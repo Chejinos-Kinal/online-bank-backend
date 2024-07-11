@@ -52,14 +52,14 @@ export const deleteAccount = async (req, res) => {
 
 export const getAccount = async (req, res) => {
   try {
-    let idUser = req.user._id;
-    let idAccount = getIdAccountUser(idUser);
-    let account = await Account.findOne({ _id: idAccount });
+    let idAccount = req.user.idAccount;
+    let account = await Account.findOne({ _id: idAccount }).populate(
+      'typeAccount',
+    );
 
-    if (!account)
-      return res.status(404).send({ message: 'cuenta no encontrada' });
+    if (!account) return res.status(404).send({ message: 'Account not found' });
 
-    return res.json({ account });
+    return res.status(200).json({ account });
   } catch (err) {
     console.error(err);
     return res.status(500).send();
