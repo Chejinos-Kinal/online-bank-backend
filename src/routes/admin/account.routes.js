@@ -6,14 +6,12 @@ import {
   getAccounts,
   updateAccount,
   deleteAccount,
-  getAccount,
 } from '../../controllers/account.controller.js';
 
-const api = express.Router();
+const router = express.Router();
 
-api.get('/', getAccounts);
-api.put('/update/account/:id', updateAccount);
-api.delete('/delete/account/:id', deleteAccount);
-api.get('/get/account', getAccount);
+router.get('/', getAccounts);
+router.put('/update/account/:id', updateAccount);
+router.delete('/delete/account/:id', deleteAccount);
 
-export default api;
+export default router;

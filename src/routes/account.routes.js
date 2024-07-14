@@ -2,10 +2,10 @@
 
 import express from 'express';
 
-import { getAccounts } from '../controllers/account.controller.js';
+import { getAccount } from '../controllers/account.controller.js';
 
 const router = express.Router();
 
-router.get('/', getAccounts);
+router.get('/get/account', getAccount);
 
 export default router;
