@@ -3,7 +3,6 @@
 import express from 'express';
 import {
   getUserClient,
-  login,
   updateUserClient,
   getCart,
   addTocart,
@@ -28,9 +27,6 @@ router.use('/movements', movementsRoutes);
 router.use('/accounts', accountRoutes);
 router.use('/favoriteAccounts', favoriteAccountRoutes);
 
-//Rutas publicas
-// router.post('/login', login);
-
 //Rutas User
 router.get('/getUserClient/:id', getUserClient);
 router.put('/updateUserClient/:id', updateUserClient);
@@ -38,8 +34,8 @@ router.get('/getUser', getUser);
 
 // Cart
 router.get('/cart', getCart);
+router.get('/cart/purchase', purchase);
 router.post('/cart', addTocart);
-router.post('/cart/purchase', purchase);
 router.delete('/cart/delete/:productId', removeFromCart);
 
 // Purchases
