@@ -10,15 +10,19 @@ import {
   deleteFavoriteAccount,
 } from '../controllers/favoriteAccount.controller.js';
 
-const api = express.Router();
+const router = express.Router();
 
-api.get('/', [validateJwt], getFavoriteAccount);
-api.post('/save/favorite/account', [validateJwt], saveFavoriteAccount);
-api.put('/update/favorite/account/:id', [validateJwt], updateFavoriteAccount);
-api.delete(
+router.get('/', [validateJwt], getFavoriteAccount);
+router.post('/save/favorite/account', [validateJwt], saveFavoriteAccount);
+router.put(
+  '/update/favorite/account/:id',
+  [validateJwt],
+  updateFavoriteAccount,
+);
+router.delete(
   '/delete/favorite/account/:id',
   [validateJwt],
   deleteFavoriteAccount,
 );
 
-export default api;
+export default router;

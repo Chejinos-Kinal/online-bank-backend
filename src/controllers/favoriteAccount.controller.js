@@ -9,6 +9,15 @@ export const test = (req, res) => {
 export const saveFavoriteAccount = async (req, res) => {
   try {
     const data = req.body;
+
+    let id = req.user._id;
+
+    data.idUser = id;
+
+    if (!data.idAccount) {
+      return res.status(400).send({ message: 'Account ID is required.' });
+    }
+
     const favoriteAccount = new FavoriteAccount(data);
     await favoriteAccount.save();
     return res
