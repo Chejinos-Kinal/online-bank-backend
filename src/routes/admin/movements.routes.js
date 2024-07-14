@@ -1,7 +1,5 @@
 import express from 'express';
 
-import { validateJwt, isAdmin } from '../../middlewares/validate-jwt.js';
-
 import {
   updateMovement,
   changeStatus,
@@ -10,15 +8,7 @@ import {
 const router = express.Router();
 
 // NOTE: movements routes
-router.put(
-  '/update/movement/:movementId',
-  [validateJwt, isAdmin],
-  updateMovement,
-);
-router.delete(
-  '/change/status/:movementId',
-  [validateJwt, isAdmin],
-  changeStatus,
-);
+router.put('/update/movement/:movementId', updateMovement);
+router.delete('/change/status/:movementId', changeStatus);
 
 export default router;

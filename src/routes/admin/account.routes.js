@@ -1,7 +1,6 @@
 'use strict';
 
 import express from 'express';
-import { validateJwt } from '../../middlewares/validate-jwt.js';
 
 import {
   getAccounts,
@@ -12,9 +11,9 @@ import {
 
 const api = express.Router();
 
-api.get('/', [validateJwt], getAccounts);
-api.put('/update/account/:id', [validateJwt], updateAccount);
-api.delete('/delete/account/:id', [validateJwt], deleteAccount);
-api.get('/get/account', [validateJwt], getAccount);
+api.get('/', getAccounts);
+api.put('/update/account/:id', updateAccount);
+api.delete('/delete/account/:id', deleteAccount);
+api.get('/get/account', getAccount);
 
 export default api;

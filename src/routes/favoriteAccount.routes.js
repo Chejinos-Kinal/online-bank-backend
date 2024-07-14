@@ -1,6 +1,5 @@
 'use strict';
 
-import { validateJwt } from '../middlewares/validate-jwt.js';
 import express from 'express';
 
 import {
@@ -12,17 +11,9 @@ import {
 
 const router = express.Router();
 
-router.get('/', [validateJwt], getFavoriteAccount);
-router.post('/save/favorite/account', [validateJwt], saveFavoriteAccount);
-router.put(
-  '/update/favorite/account/:id',
-  [validateJwt],
-  updateFavoriteAccount,
-);
-router.delete(
-  '/delete/favorite/account/:id',
-  [validateJwt],
-  deleteFavoriteAccount,
-);
+router.get('/', getFavoriteAccount);
+router.post('/save/favorite/account', saveFavoriteAccount);
+router.put('/update/favorite/account/:id', updateFavoriteAccount);
+router.delete('/delete/favorite/account/:id', deleteFavoriteAccount);
 
 export default router;

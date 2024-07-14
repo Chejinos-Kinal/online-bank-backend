@@ -19,8 +19,6 @@ import categoriesRoutes from './category.routes.js';
 import favoriteAccountRoutes from './favoriteAccount.routes.js';
 import accountRoutes from './account.routes.js';
 
-import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
-
 const router = express.Router();
 
 // NOTE: this routes are called from /user
@@ -31,20 +29,20 @@ router.use('/accounts', accountRoutes);
 router.use('/favoriteAccounts', favoriteAccountRoutes);
 
 //Rutas publicas
-router.post('/login', login);
+// router.post('/login', login);
 
 //Rutas User
-router.get('/getUserClient/:id', [validateJwt], getUserClient);
-router.put('/updateUserClient/:id', [validateJwt], updateUserClient);
-router.get('/getUser', [validateJwt], getUser);
+router.get('/getUserClient/:id', getUserClient);
+router.put('/updateUserClient/:id', updateUserClient);
+router.get('/getUser', getUser);
 
 // Cart
-router.get('/cart', validateJwt, getCart);
-router.post('/cart', validateJwt, addTocart);
-router.post('/cart/purchase', validateJwt, purchase);
-router.delete('/cart/delete/:productId', validateJwt, removeFromCart);
+router.get('/cart', getCart);
+router.post('/cart', addTocart);
+router.post('/cart/purchase', purchase);
+router.delete('/cart/delete/:productId', removeFromCart);
 
 // Purchases
-router.get('/purchases', validateJwt, getPurchases);
+router.get('/purchases', getPurchases);
 
 export default router;

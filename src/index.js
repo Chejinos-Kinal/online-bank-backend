@@ -15,10 +15,12 @@ import {
   categories,
 } from './default-data/category.data.js';
 import { createAllProducts, products } from './default-data/products.data.js';
+import { validateJwt, isAdmin } from './middlewares/validate-jwt.js';
 
 // NOTE: Routes
 import userRoutes from './routes/user.routes.js';
 import adminRoutes from './routes/admin/admin.routes.js';
+import { login } from './controllers/user.controller.js';
 
 const app = express();
 const port = process.env.PORT || 3200;
@@ -31,9 +33,9 @@ app.use(helmet());
 app.use(morgan('dev'));
 
 // NOTE: Routes
-// NOTE: Product Routes are called from /user
-app.use('/user', userRoutes);
-app.use('/admin', adminRoutes);
+app.post('/user/login', login);
+app.use('/user', [validateJwt], userRoutes);
+app.use('/admin', [validateJwt, isAdmin], adminRoutes);
 
 connection()
   .then(async () => {

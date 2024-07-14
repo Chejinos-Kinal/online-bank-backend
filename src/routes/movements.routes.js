@@ -10,12 +10,10 @@ import {
   updateMovement,
 } from '../controllers/movements.controller.js';
 
-import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
+const router = express.Router();
 
-const api = express.Router();
+router.get('/', getMovements);
+router.get('/getMyMovements', getMyMovements);
+router.post('/addMovement', addMovement);
 
-api.get('/', [validateJwt], getMovements);
-api.get('/getMyMovements', [validateJwt], getMyMovements);
-api.post('/addMovement', [validateJwt], addMovement);
-
-export default api;
+export default router;

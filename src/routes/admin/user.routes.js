@@ -1,7 +1,5 @@
 import express from 'express';
 
-import { validateJwt, isAdmin } from '../../middlewares/validate-jwt.js';
-
 import {
   createUser,
   deleteUser,
@@ -13,10 +11,10 @@ import {
 const router = express.Router();
 
 //Rutas Admin
-router.get('/', [validateJwt, isAdmin], getUsers);
-router.get('/user/:id', [validateJwt, isAdmin], getUser);
-router.post('/create/user', [validateJwt, isAdmin], createUser);
-router.put('/update/user/:id', [validateJwt, isAdmin], updateUser);
-router.delete('/delete/user/:id', [validateJwt, isAdmin], deleteUser);
+router.get('/', getUsers);
+router.get('/user/:id', getUser);
+router.post('/create/user', createUser);
+router.put('/update/user/:id', updateUser);
+router.delete('/delete/user/:id', deleteUser);
 
 export default router;

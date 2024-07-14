@@ -1,7 +1,6 @@
 'use strict';
 
 import express from 'express';
-import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
 
 // Controllers
 import {
@@ -18,10 +17,10 @@ import {
 const router = express.Router();
 
 // Public routes
-router.get('/', validateJwt, getProducts);
-router.get('/most-sold', validateJwt, getProductsMostSold);
-router.post('/search', validateJwt, searchProducts);
-router.get('/category/:categoryName', validateJwt, getProductsByCategory);
-router.get('/sold-out', validateJwt, getProductsSoldOut);
+router.get('/', getProducts);
+router.get('/most-sold', getProductsMostSold);
+router.post('/search', searchProducts);
+router.get('/category/:categoryName', getProductsByCategory);
+router.get('/sold-out', getProductsSoldOut);
 
 export default router;
