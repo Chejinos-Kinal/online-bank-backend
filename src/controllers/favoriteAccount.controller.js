@@ -2,6 +2,8 @@
 
 import FavoriteAccount from '../models/favoriteAccount.model.js';
 
+import Account from '../models/account.model.js';
+
 export const test = (req, res) => {
   return res.send({ message: 'Function test is running | Favorite Account' });
 };
@@ -16,6 +18,20 @@ export const saveFavoriteAccount = async (req, res) => {
 
     if (!data.accountNumber) {
       return res.status(400).send({ message: 'Account ID is required.' });
+    }
+
+    let existingFav = await FavoriteAccount.findOne({
+      accountNumber: data.accountNumber,
+    });
+    if (existingFav) {
+      return res
+        .status(400)
+        .send({ message: 'Favorite account already exist.' });
+    }
+
+    let favAccount = await Account.findOne({ _id: data.accountNumber });
+    if (!favAccount) {
+      return res.status(404).send({ message: 'Account not found' });
     }
 
     const favoriteAccount = new FavoriteAccount(data);
