@@ -14,7 +14,7 @@ export const saveFavoriteAccount = async (req, res) => {
 
     data.idUser = id;
 
-    if (!data.idAccount) {
+    if (!data.accountNumber) {
       return res.status(400).send({ message: 'Account ID is required.' });
     }
 
@@ -63,8 +63,9 @@ export const updateFavoriteAccount = async (req, res) => {
 
 export const getFavoriteAccount = async (req, res) => {
   try {
-    const favoriteAccounts = await FavoriteAccount.find();
-    return res.send({ favoriteAccounts });
+    const { _id } = req.user;
+    const favoriteAccounts = await FavoriteAccount.find({ idUser: _id });
+    return res.status(200).json(favoriteAccounts);
   } catch (err) {
     console.error(err);
     return res

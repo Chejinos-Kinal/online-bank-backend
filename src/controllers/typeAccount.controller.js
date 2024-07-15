@@ -93,7 +93,7 @@ export const getTypeAccount = async (req, res) => {
 export const getTypeAccounts = async (req, res) => {
   try {
     let typeAccounts = await TypeAccount.find();
-    return res.send({ message: 'Type accounts found', typeAccounts });
+    return res.status(200).json(typeAccounts);
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: 'Error getting type accounts.' });
