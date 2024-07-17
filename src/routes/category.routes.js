@@ -10,10 +10,8 @@ import {
   deleteCategory,
 } from '../controllers/category.controller.js';
 
-import { validateJwt, isAdmin } from '../middlewares/validate-jwt.js';
-
 const router = express.Router();
 
-router.get('/', validateJwt, getCategories);
+router.get('/', getCategories);
 
 export default router;

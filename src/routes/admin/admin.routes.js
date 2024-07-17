@@ -1,7 +1,5 @@
 import express from 'express';
 
-import { validateJwt, isAdmin } from '../../middlewares/validate-jwt.js';
-
 import productsRoutes from './products.routes.js';
 import categoryRoutes from './category.routes.js';
 import movementsRoutes from './movements.routes.js';
