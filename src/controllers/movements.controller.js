@@ -8,11 +8,9 @@ import User from '../models/user.model.js';
 export const addMovement = async (req, res) => {
   try {
     let data = req.body;
-
     let id = req.user._id;
 
     let user = await User.findById(id);
-
     let accountUser = await Account.findById(user.idAccount);
 
     // Verificar si la cantidad excede el balance
@@ -21,7 +19,6 @@ export const addMovement = async (req, res) => {
     }
 
     data.user = id;
-    data.account = accountUser;
     data.account = accountUser._id; // Solo almacenar el ID de la cuenta en lugar del objeto completo
 
     let movement = new Movement(data);
@@ -36,7 +33,6 @@ export const addMovement = async (req, res) => {
 
     await Account.findOneAndUpdate(
       { _id: user.idAccount },
-      { balance: accountUser.balance - data.amount },
       { $inc: { balance: -data.amount } },
       { new: true },
     );

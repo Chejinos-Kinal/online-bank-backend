@@ -1,7 +1,7 @@
 'use strict';
 
 import Account from '../models/account.model.js';
-import { getIdAccountUser } from './user.controller.js';
+import User from '../models/user.model.js';
 
 export const getAccounts = async (req, res) => {
   try {
@@ -52,14 +52,14 @@ export const deleteAccount = async (req, res) => {
 
 export const getAccount = async (req, res) => {
   try {
-    let idAccount = req.user.idAccount;
-    let account = await Account.findOne({ _id: idAccount }).populate(
-      'typeAccount',
-    );
+    let idUser = req.user._id;
+    let user = await User.findOne({ _id: idUser });
+    let account = await Account.findOne({ _id: user.idAccount });
 
-    if (!account) return res.status(404).send({ message: 'Account not found' });
+    if (!account)
+      return res.status(404).send({ message: 'cuenta no encontrada' });
 
-    return res.status(200).json({ account });
+    return res.json({ account });
   } catch (err) {
     console.error(err);
     return res.status(500).send();

@@ -6,6 +6,7 @@ import movementsRoutes from './movements.routes.js';
 import typeAccountRoutes from './typeAccount.routes.js';
 import userRoutes from './user.routes.js';
 import accountRoutes from './account.routes.js';
+import depositRoutes from './deposit.routes.js';
 
 const router = express.Router();
 
@@ -26,5 +27,8 @@ router.use('/typeAccount', typeAccountRoutes);
 
 // NOTE: type account routes
 router.use('/accounts', accountRoutes);
+
+// NOTE: deposit routes
+router.use('/deposits', depositRoutes);
 
 export default router;
