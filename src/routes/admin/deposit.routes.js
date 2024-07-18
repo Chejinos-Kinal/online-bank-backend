@@ -12,14 +12,10 @@ import {
 
 const router = express.Router();
 
-router.post('/add/deposit', [validateJwt, isAdmin], newDeposit);
-router.get(
-  '/get/depositsUser',
-  [validateJwt, isAdmin],
-  getDepositsByLoggedUser,
-);
-router.put('/update/deposit/:id', [validateJwt, isAdmin], updateDeposit);
-router.put('/revert/deposit/:id', [validateJwt, isAdmin], revertDeposit);
-router.get('/get/deposits', [validateJwt, isAdmin], getDeposits);
+router.post('/add/deposit', newDeposit);
+router.get('/get/depositsUser', getDepositsByLoggedUser);
+router.put('/update/deposit/:id', updateDeposit);
+router.put('/revert/deposit/:id', revertDeposit);
+router.get('/get/deposits', getDeposits);
 
 export default router;
