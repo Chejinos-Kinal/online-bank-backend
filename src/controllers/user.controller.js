@@ -147,7 +147,15 @@ export const getUser = async (req, res) => {
     let existingUser = await User.findOne({
       _id: userId,
       status: true,
-    }).populate('idAccount', ['balance']);
+    })
+      .populate({
+        path: 'idAccount',
+        populate: {
+          path: 'typeAccount',
+        },
+      })
+      .populate('purchases')
+      .populate('cart.product');
     if (!existingUser)
       return res.status(404).send({ message: 'User not found' });
     return res.send(existingUser);
@@ -345,7 +353,7 @@ export const removeFromCart = async (req, res) => {
 
     await user.save();
 
-    return res.json({ message: 'Product removed from cart' });
+    return res.status(200).json({ message: 'Product removed from cart' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -379,8 +387,11 @@ export const purchase = async (req, res) => {
       if (quantity > product.stock) {
         return res.status(400).json({
           message: 'Exceeded product stock',
-          productName: product.name,
-          stockAvailable: product.stock,
+          action: `
+            The product ${product.name} has ${product.stock} units available. The quantity you requested is ${quantity} units.
+            The product are going to be removed from the cart.
+          `,
+          productId: product._id,
         });
       }
 
