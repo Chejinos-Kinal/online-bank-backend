@@ -198,9 +198,9 @@ export const deleteProduct = async (req, res) => {
       return res.status(404).json({ message: 'Product not found' });
     }
 
-    await Product.findOneAndDelete(productId);
+    await Product.findByIdAndDelete(productId);
 
-    return res.json({ message: 'Course deleted' });
+    return res.json({ message: 'Product deleted' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
