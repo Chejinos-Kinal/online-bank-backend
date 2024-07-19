@@ -47,7 +47,7 @@ export const createUser = async (req, res) => {
     }); */
 
     let typeAccount = await TypeAccount.findOne({
-      name: 'Current',
+      name: 'Monetaria',
     });
 
     /* if (!existingTypeAccount)
@@ -87,11 +87,21 @@ export const deleteUser = async (req, res) => {
       return res
         .status(400)
         .send({ message: 'You can not delete another admin' });
+
     let deleteUser = await User.findOneAndUpdate(
       { _id: eliminateUser },
       { status: false },
       { new: true },
     );
+
+    let accountDeleted = await Account.findByIdAndDelete(deleteUser.idAccount);
+
+    if (!accountDeleted) {
+      return res
+        .status(404)
+        .send({ message: 'Account of the user not found and not deleted' });
+    }
+
     if (!deleteUser)
       return res
         .status(401)
@@ -106,6 +116,38 @@ export const deleteUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
+  try {
+    let data = req.body;
+    let updateUser = req.params.id;
+    let userId = req.user._id;
+    let existingUser = await User.findOne({ _id: updateUser });
+    if (existingUser.role == 'ADMIN' && updateUser != userId)
+      return res
+        .status(400)
+        .send({ message: 'You can not update another admin' });
+    if (data.DPI || data.password)
+      return res
+        .status(401)
+        .send({ message: 'The DPI or password cannot be changed' });
+    let updatedUser = await User.findOneAndUpdate({ _id: updateUser }, data, {
+      new: true,
+    });
+    if (!updatedUser)
+      return res
+        .status(404)
+        .send({ message: 'User not found and not updated' });
+    return res.send({
+      message: `User ${updatedUser.username} updated succesfully`,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({ message: 'Error updating user' });
+  }
+};
+
+//UPDATE USER FOR ADMIN
+
+export const updateUserForAdmin = async (req, res) => {
   try {
     let data = req.body;
     let updateUser = req.params.id;
