@@ -14,7 +14,7 @@ const router = express.Router();
 router.get('/get/typeAccount', getTypeAccount);
 router.get('/get/typeAccounts', getTypeAccounts);
 router.post('/save/typeAccount', saveTypeAccount);
-router.put('/update/typeAccount/:typeAccountId', updateTypeAccount);
-router.delete('/delete/typeAccount/:typeAccountId', deleteTypeAccount);
+router.put('/update/typeAccount/:id', updateTypeAccount);
+router.delete('/delete/typeAccount/:id', deleteTypeAccount);
 
 export default router;
