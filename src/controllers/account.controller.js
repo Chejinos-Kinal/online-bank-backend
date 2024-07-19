@@ -54,11 +54,14 @@ export const getAccount = async (req, res) => {
   try {
     let idUser = req.user._id;
     let user = await User.findOne({ _id: idUser });
-    let account = await Account.findOne({ _id: user.idAccount });
+    let account = await Account.findOne({ _id: user.idAccount }).populate(
+      'typeAccount',
+    );
 
     if (!account)
       return res.status(404).send({ message: 'cuenta no encontrada' });
 
+    console.log(account);
     return res.json({ account });
   } catch (err) {
     console.error(err);

@@ -1,5 +1,52 @@
 import User from '../models/user.model.js';
+import accountModel from '../models/account.model.js';
+import typeAccountModel from '../models/typeAccount.model.js';
 import { encrypt } from '../utils/bcrypt.js';
+
+export const accounts = [
+  {
+    accountNumber: '1234567890',
+    balance: 5000,
+    typeAccount: 'Monetaria',
+  },
+  {
+    accountNumber: '1234567891',
+    balance: 1000,
+    typeAccount: 'Ahorro',
+  },
+  {
+    accountNumber: '1234567892',
+    balance: 1000,
+    typeAccount: 'Monetaria',
+  },
+];
+
+export const createAllAccounts = async (accounts) => {
+  try {
+    for (let i = 0; i < accounts.length; i++) {
+      let existing = await accountModel.findOne({
+        accountNumber: accounts[i].accountNumber,
+      });
+
+      if (!existing) {
+        let data = {
+          ...accounts[i],
+          typeAccount: await typeAccountModel
+            .findOne({ name: accounts[i].typeAccount })
+            .select('_id'),
+        };
+        let account = new accountModel(data);
+        await account.save();
+      }
+
+      console.log('Account already exist');
+    }
+
+    return console.log('Accounts created successfully');
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 // NOTE: Don't encrypt password on objects, `createAllUsers` function already does that
 export const users = [
@@ -17,16 +64,29 @@ export const users = [
     role: 'ADMIN',
   },
   {
-    name: 'user',
-    surname: 'client',
-    username: 'user',
+    name: 'Ander',
+    surname: 'Cabrera',
+    username: 'acabrera',
     DPI: '123467890109',
-    address: 'Cale 123',
+    address: 'Zona 7',
     phoneNumber: '1235678',
-    email: 'user@gmail.com',
+    email: 'acabrera@gmail.com',
     password: '123',
-    nameJob: 'user',
-    monthlySalary: 100,
+    nameJob: 'Programador',
+    monthlySalary: 500,
+    role: 'USER',
+  },
+  {
+    name: 'Franco',
+    surname: 'Paiz',
+    username: 'fpaiz',
+    DPI: '123467890107',
+    address: 'Villa Nueva',
+    phoneNumber: '1235678',
+    email: 'fpaiz@gmail.com',
+    password: '123',
+    nameJob: 'Programador',
+    monthlySalary: 300,
     role: 'USER',
   },
 ];
@@ -34,20 +94,16 @@ export const users = [
 export const createAllUsers = async (users) => {
   try {
     for (let i = 0; i < users.length; i++) {
-      let existingUser = await User.findOne({ username: users[i].username });
-      if (!existingUser) {
+      let existing = await User.findOne({ username: users[i].username });
+      if (!existing) {
         let data = {
-          name: users[i].name,
-          surname: users[i].surname,
-          username: users[i].username,
-          DPI: users[i].DPI,
-          address: users[i].address,
-          phoneNumber: users[i].phoneNumber,
-          email: users[i].email,
+          ...users[i],
           password: await encrypt(users[i].password),
-          nameJob: users[i].nameJob,
-          monthlySalary: users[i].monthlySalary,
-          role: users[i].role,
+          idAccount: await accountModel
+            .findOne({
+              accountNumber: accounts[i].accountNumber,
+            })
+            .select('_id'),
         };
         let user = new User(data);
         await user.save();
@@ -55,6 +111,7 @@ export const createAllUsers = async (users) => {
         console.log('User already exist');
       }
     }
+
     return console.log('Users created successfully');
   } catch (error) {
     console.error(error);

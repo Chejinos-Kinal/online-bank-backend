@@ -5,7 +5,12 @@ import cors from 'cors';
 import 'dotenv/config.js';
 
 import connection from './db/mongo.js';
-import { users, createAllUsers } from './default-data/user.data.js';
+import {
+  users,
+  createAllUsers,
+  accounts,
+  createAllAccounts,
+} from './default-data/user.data.js';
 import {
   typeAccounts,
   createAllTypeAccounts,
@@ -39,10 +44,11 @@ app.use('/admin', [validateJwt, isAdmin], adminRoutes);
 
 connection()
   .then(async () => {
-    await createAllUsers(users);
     await createAllTypeAccounts(typeAccounts);
     await createAllCategories(categories);
     await createAllProducts(products);
+    await createAllAccounts(accounts);
+    await createAllUsers(users);
   })
   .catch((error) => {
     console.error(error);

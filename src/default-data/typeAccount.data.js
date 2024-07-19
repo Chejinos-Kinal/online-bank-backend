@@ -2,12 +2,12 @@ import TypeAccount from '../models/typeAccount.model.js';
 
 export const typeAccounts = [
   {
-    name: 'Savings',
-    description: 'Savings account',
+    name: 'Monetaria',
+    description: 'Monetary account',
   },
   {
-    name: 'Current',
-    description: 'Current account',
+    name: 'Ahorro',
+    description: 'Account for savings',
   },
 ];
 
