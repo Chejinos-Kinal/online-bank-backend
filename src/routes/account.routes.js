@@ -11,9 +11,9 @@ import {
 
 const router = express.Router();
 
-api.get('/', getAccounts);
-api.put('/update/account/:id', updateAccount);
-api.delete('/delete/account/:id', deleteAccount);
-api.get('/get/account', getAccount);
+router.get('/', getAccounts);
+router.put('/update/account/:id', updateAccount);
+router.delete('/delete/account/:id', deleteAccount);
+router.get('/get/account', getAccount);
 
 export default router;

@@ -25,10 +25,10 @@ export const updateTypeAccount = async (req, res) => {
     let data = req.body;
     let typeAccountId = req.params.id;
     let defaultTypeAccount = await TypeAccount.findOne({ name: 'Default' });
-    if (defaultTypeAccount._id == typeAccountId)
-      return res
-        .status(401)
-        .send({ message: 'Default type account cannot be updated' });
+    // if (defaultTypeAccount._id == typeAccountId)
+    //   return res
+    //     .status(401)
+    //     .send({ message: 'Default type account cannot be updated' });
     let updatedTypeAccount = await TypeAccount.findOneAndUpdate(
       { _id: typeAccountId },
       data,
@@ -52,10 +52,10 @@ export const deleteTypeAccount = async (req, res) => {
   try {
     let typeAccountId = req.params.id;
     let defaultTypeAccount = await TypeAccount.findOne({ name: 'Default' });
-    if (defaultTypeAccount._id == typeAccountId)
-      return res
-        .status(401)
-        .send({ message: 'Default type account cannot be deleted' });
+    // if (defaultTypeAccount._id == typeAccountId)
+    //   return res
+    //     .status(401)
+    //     .send({ message: 'Default type account cannot be deleted' });
     let deletedTypeAccount = await TypeAccount.findOneAndDelete({
       _id: typeAccountId,
     });
@@ -63,10 +63,10 @@ export const deleteTypeAccount = async (req, res) => {
       return res
         .status(404)
         .send({ message: 'Type account not found and not deleted' });
-    await Account.updateMany(
-      { typeAccount: typeAccountId },
-      { typeAccount: defaultTypeAccount._id },
-    );
+    // await Account.updateMany(
+    //   { typeAccount: typeAccountId },
+    //   { typeAccount: defaultTypeAccount._id },
+    // );
     return res.send({
       message: 'Type account deleted succesfully',
       deletedTypeAccount,
