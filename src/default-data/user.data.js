@@ -1,21 +1,22 @@
 import User from '../models/user.model.js';
 import accountModel from '../models/account.model.js';
 import typeAccountModel from '../models/typeAccount.model.js';
+import { generateAccountNumber } from '../controllers/user.controller.js';
 import { encrypt } from '../utils/bcrypt.js';
 
 export const accounts = [
   {
-    accountNumber: '1234567890',
+    accountNumber: generateAccountNumber(),
     balance: 5000,
     typeAccount: 'Monetaria',
   },
   {
-    accountNumber: '1234567891',
+    accountNumber: generateAccountNumber(),
     balance: 1000,
     typeAccount: 'Ahorro',
   },
   {
-    accountNumber: '1234567892',
+    accountNumber: generateAccountNumber(),
     balance: 1000,
     typeAccount: 'Monetaria',
   },

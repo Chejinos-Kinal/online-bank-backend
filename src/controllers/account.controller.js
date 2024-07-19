@@ -61,7 +61,6 @@ export const getAccount = async (req, res) => {
     if (!account)
       return res.status(404).send({ message: 'cuenta no encontrada' });
 
-    console.log(account);
     return res.json({ account });
   } catch (err) {
     console.error(err);
