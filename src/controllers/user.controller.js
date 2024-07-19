@@ -8,6 +8,7 @@ import TypeAccount from '../models/typeAccount.model.js';
 import { encrypt, checkPassword } from '../utils/bcrypt.js';
 import { createToken } from '../utils/jwt.js';
 import userModel from '../models/user.model.js';
+import { Error } from 'mongoose';
 
 export const getIdAccountUser = async (idUser) => {
   try {
@@ -344,7 +345,7 @@ export const removeFromCart = async (req, res) => {
     );
 
     if (!existingCartItem) {
-      return res.status(400).json({ message: 'Product not in cart' });
+      return res.status(404).json({ message: 'Product not found in cart' });
     }
 
     user.cart = user.cart.filter(
@@ -353,7 +354,7 @@ export const removeFromCart = async (req, res) => {
 
     await user.save();
 
-    return res.status(200).json({ message: 'Product removed from cart' });
+    return res.json({ message: 'Product removed from cart' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -361,10 +362,15 @@ export const removeFromCart = async (req, res) => {
 
 export const purchase = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.user._id }).populate({
-      path: 'cart.product',
-      select: 'name price stock',
-    });
+    const user = await User.findOne({ _id: req.user._id })
+      .populate({
+        path: 'cart.product',
+        select: 'name price stock',
+      })
+      .populate('idAccount');
+    let balance = user.idAccount.balance;
+
+    console.log('user from purchase', user);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -393,6 +399,15 @@ export const purchase = async (req, res) => {
           `,
           productId: product._id,
         });
+      } else if (total + product.price * quantity > balance) {
+        return res.status(403).json({
+          message: 'Insufficient funds',
+          action: `
+            The total amount of the purchase is ${total + product.price * quantity} and your balance is ${balance}.
+            Please deposit money to your account.
+          `,
+          productId: product._id,
+        });
       }
 
       const purchaseItem = {
@@ -410,6 +425,10 @@ export const purchase = async (req, res) => {
       const productUpdateTimesSold = await Product.findById(product._id);
       productUpdateTimesSold.timesSold += quantity;
 
+      const balanceUpdate = await Account.findById(user.idAccount);
+      balanceUpdate.balance -= total;
+
+      await balanceUpdate.save();
       await productUpdateTimesSold.save();
       await product.save();
     }
