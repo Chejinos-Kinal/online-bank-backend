@@ -8,6 +8,7 @@ import TypeAccount from '../models/typeAccount.model.js';
 import { encrypt, checkPassword } from '../utils/bcrypt.js';
 import { createToken } from '../utils/jwt.js';
 import userModel from '../models/user.model.js';
+import { Error } from 'mongoose';
 
 export const getIdAccountUser = async (idUser) => {
   try {
@@ -151,7 +152,15 @@ export const getUser = async (req, res) => {
     let existingUser = await User.findOne({
       _id: userId,
       status: true,
-    }).populate('idAccount', ['balance']);
+    })
+      .populate({
+        path: 'idAccount',
+        populate: {
+          path: 'typeAccount',
+        },
+      })
+      .populate('purchases')
+      .populate('cart.product');
     if (!existingUser)
       return res.status(404).send({ message: 'User not found' });
     return res.send(existingUser);
@@ -340,7 +349,7 @@ export const removeFromCart = async (req, res) => {
     );
 
     if (!existingCartItem) {
-      return res.status(400).json({ message: 'Product not in cart' });
+      return res.status(404).json({ message: 'Product not found in cart' });
     }
 
     user.cart = user.cart.filter(
@@ -357,10 +366,15 @@ export const removeFromCart = async (req, res) => {
 
 export const purchase = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.user._id }).populate({
-      path: 'cart.product',
-      select: 'name price stock',
-    });
+    const user = await User.findOne({ _id: req.user._id })
+      .populate({
+        path: 'cart.product',
+        select: 'name price stock',
+      })
+      .populate('idAccount');
+    let balance = user.idAccount.balance;
+
+    console.log('user from purchase', user);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -383,8 +397,20 @@ export const purchase = async (req, res) => {
       if (quantity > product.stock) {
         return res.status(400).json({
           message: 'Exceeded product stock',
-          productName: product.name,
-          stockAvailable: product.stock,
+          action: `
+            The product ${product.name} has ${product.stock} units available. The quantity you requested is ${quantity} units.
+            The product are going to be removed from the cart.
+          `,
+          productId: product._id,
+        });
+      } else if (total + product.price * quantity > balance) {
+        return res.status(403).json({
+          message: 'Insufficient funds',
+          action: `
+            The total amount of the purchase is ${total + product.price * quantity} and your balance is ${balance}.
+            Please deposit money to your account.
+          `,
+          productId: product._id,
         });
       }
 
@@ -403,6 +429,10 @@ export const purchase = async (req, res) => {
       const productUpdateTimesSold = await Product.findById(product._id);
       productUpdateTimesSold.timesSold += quantity;
 
+      const balanceUpdate = await Account.findById(user.idAccount);
+      balanceUpdate.balance -= total;
+
+      await balanceUpdate.save();
       await productUpdateTimesSold.save();
       await product.save();
     }

@@ -9,6 +9,10 @@ export const typeAccounts = [
     name: 'Ahorro',
     description: 'Account for savings',
   },
+  {
+    name: 'Current',
+    description: 'Current account',
+  },
 ];
 
 export const createAllTypeAccounts = async (typeAccounts) => {
