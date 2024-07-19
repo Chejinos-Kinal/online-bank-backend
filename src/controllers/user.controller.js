@@ -7,6 +7,7 @@ import Purchase from '../models/purchase.model.js';
 import TypeAccount from '../models/typeAccount.model.js';
 import { encrypt, checkPassword } from '../utils/bcrypt.js';
 import { createToken } from '../utils/jwt.js';
+import userModel from '../models/user.model.js';
 
 export const getIdAccountUser = async (idUser) => {
   try {
@@ -157,30 +158,56 @@ export const getUser = async (req, res) => {
 };
 
 // NOTE: Client
-export const updateUserClient = async (req, res) => {
+export const updateMyUser = async (req, res) => {
   try {
-    const allowedFields = ['name', 'surname', 'address', 'nameJob'];
-    const data = req.body;
-    const userIdU = req.params.id;
-    const userIdL = req.user._id;
-    if (userIdL.toString() !== userIdU.toString())
-      return res.status(401).send({ message: 'You only can update your user' });
-    const keys = Object.keys(data);
-    const disallowedFields = keys.filter((key) => !allowedFields.includes(key));
-    if (disallowedFields.length > 0)
-      return res.status(400).send({
-        message: `You cannot update the following fields: ${disallowedFields.join(', ')}`,
-      });
-    if (keys.length === 0)
-      return res.status(400).send({ message: 'No fields to update' });
-    let updatedUser = await User.findOneAndUpdate({ _id: userIdU }, data, {
+    const {
+      name,
+      surname,
+      username,
+      phoneNumber,
+      email,
+      address,
+      nameJob,
+      monthlySalary,
+    } = req.body;
+    const user = await userModel.findOne({ _id: req.user._id });
+
+    if (!user) {
+      return res.status(404).send({ message: 'User not found' });
+    }
+
+    // Check if username or email already exists in another user
+    const existingUser = await userModel.findOne({
+      $or: [{ username }, { email }],
+      _id: { $ne: req.user._id },
+    });
+
+    if (existingUser) {
+      if (existingUser.username === username) {
+        return res.status(400).send({ message: 'Username already exists' });
+      }
+      if (existingUser.email === email) {
+        return res.status(400).send({ message: 'Email already exists' });
+      }
+    }
+
+    // Update only the fields that are provided
+    const updateData = {
+      ...(name && { name }),
+      ...(surname && { surname }),
+      ...(username && { username }),
+      ...(phoneNumber && { phoneNumber }),
+      ...(email && { email }),
+      ...(address && { address }),
+      ...(nameJob && { nameJob }),
+      ...(monthlySalary && { monthlySalary }),
+    };
+
+    await userModel.findOneAndUpdate({ _id: req.user._id }, updateData, {
       new: true,
     });
-    if (!updatedUser)
-      return res
-        .status(401)
-        .send({ message: 'User not found and not updated' });
-    return res.send({ message: 'User updated successfully', updatedUser });
+
+    return res.status(200).json({ message: 'User updated successfully' });
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: 'Error updating user' });

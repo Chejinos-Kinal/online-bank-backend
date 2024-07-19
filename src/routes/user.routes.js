@@ -3,7 +3,7 @@
 import express from 'express';
 import {
   getUserClient,
-  updateUserClient,
+  updateMyUser,
   getCart,
   addTocart,
   purchase,
@@ -29,7 +29,7 @@ router.use('/favoriteAccounts', favoriteAccountRoutes);
 
 //Rutas User
 router.get('/getUserClient/:id', getUserClient);
-router.put('/updateUserClient/:id', updateUserClient);
+router.put('/updateUserClient', updateMyUser);
 router.get('/getUser', getUser);
 
 // Cart
